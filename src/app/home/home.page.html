@@ -1,0 +1,72 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button></ion-buttons>
+    <ion-title class="titulo-principal">SkeletonAPP</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+
+<ion-card color="light">
+
+  <mat-card class="ion-padding" color="primary" style="padding-top: 20px;">
+    <mat-card-header>
+      <mat-card-title>Bienvenido!</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Usuario: {{ user }}</p>
+    </mat-card-content>
+  </mat-card>
+  
+  <div style="padding: 16px;">
+    <strong>Información Adicional</strong>
+
+    <div #nombreField class="nombreInput">
+      <ion-label>Nombre</ion-label>
+      <ion-input [(ngModel)]="nombre" placeholder=""></ion-input>
+    </div>
+    <div #apellidoField class="apellidoInput">
+      <ion-label>Apellido</ion-label>
+      <ion-input [(ngModel)]="apellido" placeholder=""></ion-input>
+    </div>
+    
+  
+    <mat-form-field appearance="fill" style="width: 100%; margin-top: 10px;">
+      <mat-label>Nivel de Educación</mat-label>
+      <mat-select [(ngModel)]="educacion" placeholder="Seleccione Nivel">
+        <mat-option *ngFor="let nivel of nivelesEducacion" [value]="nivel">
+          {{ nivel }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha de Nacimiento</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="nacimiento" placeholder="dd/mm/yyyy">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  
+
+    <div >
+      <button mat-raised-button color="warn" (click)="limpiar()">Limpiar</button>
+      <button mat-raised-button color="warn" (click)="mostrar()">Mostrar</button>
+    </div>
+  </div>
+</ion-card>
+
+</ion-content>
+
+
+
+  <ion-footer>
+    <ion-toolbar color="light">
+      <ion-title class="ion-text-center" size="small">
+        © 2025 SkeletonAPP - Creado por Daniel Alarcón
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>
+

@@ -1,0 +1,50 @@
+<ion-content [fullscreen]="true">
+  <ion-card color="light">
+    <ion-card-header>
+      <ion-card-title>SkeltonAPP</ion-card-title>
+      <ion-card-subtitle>Aquí comenzó todo</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <br>
+      <h1>Bienvenido!</h1>
+    </ion-card-content>
+    
+    <ion-list>
+
+      <ion-item>
+        <ion-label position="stacked">Usuario</ion-label>
+        <ion-input [(ngModel)]="user" placeholder ="nombre" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Password</ion-label>
+        <ion-input [(ngModel)]="password" placeholder ="●●●●" type="password" style="padding-top: 10px;"></ion-input>
+      </ion-item>
+
+      <div class="ion-text-center">
+        <ion-button (click)="login()" class="login-button">Ingresar</ion-button>
+        
+      </div>
+
+      <ion-text color="medium">
+        <p class="ion-text-center">
+          <a href="/login">Crea tu cuenta gratis</a>
+        </p>
+      </ion-text>
+
+    </ion-list>
+
+  </ion-card>
+
+
+  <ion-footer>
+    <ion-toolbar color="light">
+      <ion-title class="ion-text-center" size="small">
+        © 2025 SkeletonAPP - Creado por Daniel Alarcón
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>
+
+
+</ion-content>

@@ -1,0 +1,58 @@
+.login-button {
+    max-width: 250px;
+    font-size: 1.2rem;
+    padding: 6px 24px;
+    transition: transform 0.2s ease-in-out;
+    margin: 5px auto;
+    display: block;
+  }
+
+.login-button:hover {
+    transform: scale(1.1);
+  }
+
+
+ion-content {
+    --background: #2c417c; /* Un azul claro suave, puedes cambiarlo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 16px; /* Espacio alrededor del contenido */
+    font-family: 'Arial', sans-serif; /* Fuente más amigable */
+    color: #333; /* Color de texto más oscuro para mejor contraste */
+    text-align: center; /* Centrar el texto */
+    box-sizing: border-box; /* Asegura que el padding no afecte al tamaño total */
+}
+
+ion-card {
+    --background: #f0f4ff85; /* Un azul claro suave, puedes cambiarlo */
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+    padding: 0 16px; /* Espacio alrededor del contenido */
+    font-family: 'Arial', sans-serif; /* Fuente más amigable */
+    color: #333; /* Color de texto más oscuro para mejor contraste */
+    text-align: center; /* Centrar el texto */
+    box-sizing: border-box; /* Asegura que el padding no afecte al tamaño total */
+    border-radius: 30px; /* Bordes redondeados */
+}
+
+ion-list {
+    border-radius: 30px; /* Bordes redondeados */
+}
+
+ion-text {
+font-size: 16px;
+}
+
+ion-card-title{
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 0px; /* Espacio debajo del título */
+}
+
+ion-label {
+  margin-bottom: 10px;
+}
