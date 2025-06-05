@@ -1,36 +1,35 @@
-
 .main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: flex; // Usa flexbox para centrar el contenido
+  flex-direction: column; // Apila los elementos en columna
+  align-items: center; // Centra los elementos horizontalmente
+  justify-content: center; // Centra los elementos verticalmente
   
-  height: 95%;
-  background-color: #fffffff3;
-  padding: 0 16px; /* Espacio alrededor del contenido */
-  color: #333; /* Color de texto más oscuro para mejor contraste */
-  text-align: center; /* Centrar el texto */
-  box-sizing: border-box; /* Asegura que el padding no afecte al tamaño total */
-  border-radius: 40px;
+  height: 95%; // Altura del contenedor principal
+  background-color: #fffffff3; // Fondo blanco translúcido
+  padding: 0 16px; /* Espacio horizontal alrededor del contenido */
+  color: #333; // Color de texto oscuro
+  text-align: center; // Centra el texto
+  box-sizing: border-box; // Incluye el padding en el tamaño total
+  border-radius: 40px; // Bordes redondeados
   
 }
 
 ion-content::part(scroll) {
-  background-image: url('../../assets/images/background.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-image: url('../../assets/images/background.jpg'); // Imagen de fondo
+  background-size: cover; // Escala la imagen para cubrir todo
+  background-position: center; // Centra la imagen
+  background-repeat: no-repeat; // No repetir la imagen
 
 }
 
 .home {
-  display: flex;
-  position: relative;
-  height: 100%;
-  padding: 0 16px; /* Espacio alrededor del contenido */
-  color: #333; /* Color de texto más oscuro para mejor contraste */
-  text-align: center; /* Centrar el texto */
-  box-sizing: border-box; /* Asegura que el padding no afecte al tamaño total */
+  display: flex; // Flexbox para el layout principal
+  position: relative; // Necesario para posicionamiento interno
+  height: 100%; // Altura completa
+  padding: 0 16px; // Padding lateral
+  color: #333; // Color del texto
+  text-align: center; // Centrado de texto
+  box-sizing: border-box; // Incluye padding en el tamaño
 }
 
 
@@ -38,39 +37,39 @@ ion-content::part(scroll) {
 
 
 .titulo-principal {
-  font-weight: bold;
+  font-weight: bold; // Texto en negrita para destacar el título
 }
 
 
 .animacion-limpiar {
-  animation: slide-left-right 1s ease-in-out;
+  animation: slide-left-right 1s ease-in-out; // Animación de deslizamiento horizontal suave
 }
 
 @keyframes slide-left-right {
   0% {
-    transform: translateX(-100%);
-    opacity: 0.3;
+    transform: translateX(-100%); // Inicia fuera de la pantalla a la izquierda
+    opacity: 0.3; // Opacidad baja al inicio
   }
   50% {
-    transform: translateX(20%);
-    opacity: 1;
+    transform: translateX(20%); // Se mueve ligeramente hacia la derecha
+    opacity: 1; // Opacidad completa en la mitad
   }
   100% {
-    transform: translateX(0);
-    opacity: 1;
+    transform: translateX(0); // Termina en posición original
+    opacity: 1; // Opacidad completa
   }
 }
 
 
 
 mat-card-header {
-  padding: auto;
-  align-self: center;
+  padding: auto; // Ajuste automático de padding
+  align-self: center; // Centra el header dentro del card
 }
 
 mat-card {
-  background-color: #ffffff2c;
-  border-radius: 20px;
+  background-color: #ffffff2c; // Fondo semi-transparente para el card
+  border-radius: 20px; // Bordes redondeados para suavizar el diseño
   
 }
 
@@ -78,93 +77,92 @@ mat-card {
 
 @keyframes slideRight {
   0% {
-    transform: translateX(0);
+    transform: translateX(0); // Posición inicial
   }
   50% {
-    transform: translateX(20px);
+    transform: translateX(20px); // Se mueve 20px a la derecha
   }
   100% {
-    transform: translateX(0);
+    transform: translateX(0); // Regresa a la posición original
   }
 }
 
 .animar-slide {
-  animation: slideRight 1s ease-in-out;
+  animation: slideRight 1s ease-in-out; // Animación de deslizamiento lateral suave
 }
 
 
 .nombreInput, .apellidoInput {
-  margin-top: 16px;
-  margin-bottom: 10px;
-  padding: 3px;
-  padding-left: 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #c4c6d266;
-  text-align: left;
-  color: #000000; 
-  font-size: 16px;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  margin-top: 16px; // Espacio superior para separación
+  margin-bottom: 10px; // Espacio inferior para separación
+  padding: 3px; // Espacio interno pequeño
+  padding-left: 12px; // Espacio interno a la izquierda para texto
+  border: 1px solid #ccc; // Borde gris claro
+  border-radius: 8px; // Bordes suavizados
+  background-color: #c4c6d266; // Fondo gris claro translúcido
+  text-align: left; // Alineación del texto a la izquierda
+  color: #000000;  // Texto negro para buena legibilidad
+  font-size: 16px; // Tamaño de fuente legible
+  transition: border-color 0.3s, box-shadow 0.3s; // Transiciones suaves para interacción
 }
 
 .nombreInput:hover, .apellidoInput:hover {
   
-  background-color: #c5c8d4;
-  box-shadow: 0 0 5px rgba(70, 100, 165, 0.979); /* sombra sutil */
+  background-color: #c5c8d4; // Cambio de fondo al pasar el mouse
+  box-shadow: 0 0 5px rgba(70, 100, 165, 0.979); /* sombra sutil para resaltar */
 }
 
 .ion-padding {
-  padding: auto;
-  background-color: #c29b9bf8;
+  padding: auto; // Ajuste automático de padding
+  background-color: #c29b9bf8; // Fondo azul translúcido para secciones con padding
 }
 
 mat-card-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #ffffff;
+  font-size: 24px; // Tamaño grande para título en cards
+  font-weight: bold; // Negrita para destacar
+  color: #ffffff; // Texto blanco para contraste
 }
 
 .usuario {
-  font-size: 20px;
-
-  color: #ffffff;
+  font-size: 20px; // Tamaño medio para texto de usuario
+  color: #ffffff; // Texto blanco para visibilidad
 }
 
 .custom-header-toolbar {
-  --background: #c29b9bf8;
-  --color: #ffffff;
+  --background: #c29b9bf8; // Fondo azul translúcido para toolbar
+  --color: #ffffff; // Color de texto blanco
 }
 
 .logo {
-  width: 100px;
-  margin-left: auto;
-  margin-right: 16px;
-  display: block;
+  width: 100px; // Ancho del logo
+  margin-left: auto; // Empuja a la derecha
+  margin-right: 16px; // Separación del borde derecho
+  display: block; // Elimina espacio extra por inline
 }
 
 .foto-perfil{
-  width: 100px;
-  height: 100px;
-  margin: 10px auto;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid #ffffff;
-  display: block;
+  width: 100px; // Ancho fijo
+  height: 100px; // Alto fijo
+  margin: 10px auto; // Centrado con margen
+  border-radius: 50%; // Hace la imagen circular
+  object-fit: cover; // Ajuste de la imagen dentro del contenedor
+  border: 4px solid #ffffff; // Borde blanco
+  display: block; // Comportamiento de bloque
 }
 
 .btn-custom {
-  background: #c29b9bf8 !important;
-  color: #ffffff !important;
-  border-radius: 20px;
-  padding: 10px 20px;
-  margin: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background 0.3s, transform 0.3s;
+  background: #c29b9bf8 !important; // Fondo personalizado
+  color: #ffffff !important; // Texto blanco
+  border-radius: 20px; // Bordes redondeados
+  padding: 10px 20px; // Espaciado interno
+  margin: 10px; // Margen externo
+  font-size: 16px; // Tamaño del texto
+  font-weight: bold; // Texto en negrita
+  transition: background 0.3s, transform 0.3s; // Transiciones suaves
 }
 
 .subtitulo {
-  font-size: 20px;
-  margin-top: 10px;
-  font-weight: bold;
+  font-size: 20px; // Tamaño de fuente para subtítulos
+  margin-top: 10px; // Margen superior para separación
+  font-weight: bold; // Negrita para destacar
 }
