@@ -24,8 +24,8 @@ export class LoginPage {
   async mostrarToasts() {
     const toast = await this.toastController.create({
       message: 'Iniciando Sesión.',
-      duration: 2000,
-      color: 'success'
+      duration: 300,
+      color: 'success',
     });
     await toast.present();
   }

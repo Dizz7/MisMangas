@@ -9,9 +9,11 @@
     --color: white;
   }
 
-.login-button:hover {
+  ion-button.login-button:hover {
     transform: scale(1.1);
   }
+
+
 
 .vinculo, h1, .label {
   color: #c29b9bf8;
@@ -33,7 +35,6 @@
     align-items: center;
     justify-content: center;
     height: 80%;
-    font-family: 'Arial', sans-serif; /* Fuente más amigable */
     color: #333; /* Color de texto más oscuro para mejor contraste */
     text-align: center; /* Centrar el texto */
     box-sizing: border-box; /* Asegura que el padding no afecte al tamaño total */
@@ -47,7 +48,7 @@ ion-card {
     justify-content: center;
     display: flex;
     flex-direction: column;
-    font-family: 'Arial', sans-serif; /* Fuente más amigable */
+
     color: #333; /* Color de texto más oscuro para mejor contraste */
     text-align: center; /* Centrar el texto */
     box-sizing: border-box; /* Asegura que el padding no afecte al tamaño total */
@@ -114,3 +115,4 @@ ion-item.item-has-focus {
 ion-footer{
   position: bottom;
 }
+
