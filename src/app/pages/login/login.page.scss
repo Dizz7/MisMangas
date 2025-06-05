@@ -1,46 +1,64 @@
 .login-button {
-    max-width: 250px;
+    width: 80%;
     font-size: 1.2rem;
     padding: 6px 24px;
     transition: transform 0.2s ease-in-out;
     margin: 5px auto;
     display: block;
+    --background: #c29b9bf8;
+    --color: white;
   }
 
 .login-button:hover {
     transform: scale(1.1);
   }
 
+.vinculo, h1, .label {
+  color: #c29b9bf8;
+  font-weight: bold;
+}
 
-ion-content {
-    --background: #2c417c; /* Un azul claro suave, puedes cambiarlo */
+.logo {
+  width: 200px;
+  display: block;
+  padding: auto;
+  margin: auto;
+}
+
+
+ ion-content {
+    --background: transparent !important; /* Asegura que el fondo sea transparente */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    padding: 0 16px; /* Espacio alrededor del contenido */
+    height: 80%;
     font-family: 'Arial', sans-serif; /* Fuente más amigable */
     color: #333; /* Color de texto más oscuro para mejor contraste */
     text-align: center; /* Centrar el texto */
     box-sizing: border-box; /* Asegura que el padding no afecte al tamaño total */
-}
+    position: relative;
+    z-index: 1;
+} 
 
 ion-card {
-    --background: #f0f4ff85; /* Un azul claro suave, puedes cambiarlo */
+    background: transparent; /* Fondo transparente */
     align-items: center;
     justify-content: center;
-    height: 90%;
-    padding: 0 16px; /* Espacio alrededor del contenido */
+    display: flex;
+    flex-direction: column;
     font-family: 'Arial', sans-serif; /* Fuente más amigable */
     color: #333; /* Color de texto más oscuro para mejor contraste */
     text-align: center; /* Centrar el texto */
     box-sizing: border-box; /* Asegura que el padding no afecte al tamaño total */
-    border-radius: 30px; /* Bordes redondeados */
+    border-radius: 10px; /* Bordes redondeados */
 }
 
 ion-list {
-    border-radius: 30px; /* Bordes redondeados */
+  width: 90%;
+  height: 90%;
+  margin-bottom: 20px;
+  border-radius: 10px;
 }
 
 ion-text {
@@ -48,11 +66,51 @@ font-size: 16px;
 }
 
 ion-card-title{
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
-    margin-bottom: 0px; /* Espacio debajo del título */
+    
 }
 
 ion-label {
   margin-bottom: 10px;
+}
+
+ion-card-header {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  align-self: auto;
+  position: top;
+  display: block; /* Asegura que el centrado con margin funcione */
+  box-sizing: border-box; /* Asegura que el padding no afecte al tamaño total */
+}
+
+ion-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 95%;
+  background-image: url('/assets/images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+ion-item {
+  width: 90%;
+  margin: auto;
+  box-sizing: border-box;
+  
+}
+ion-item.item-has-focus {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+
+ion-footer{
+  position: bottom;
 }
