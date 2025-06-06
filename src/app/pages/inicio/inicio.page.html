@@ -1,13 +1,27 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>inicio</ion-title>
+<ion-header>
+  <ion-toolbar class="custom-header-toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button></ion-buttons>
+      <img src="/assets/images/logo.png" alt="Logo de MisMangas" class="logo" />
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">inicio</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+<ion-content>
+  <ion-card>
+
+      <ion-title class="titulo-principal">Inicio</ion-title>
+
+
+
+  </ion-card>
 </ion-content>
+
+
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-title class="ion-text-center" size="small">
+      © 2025 MisMangas - Creado por Daniel Alarcón
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

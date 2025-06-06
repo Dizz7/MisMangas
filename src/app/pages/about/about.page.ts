@@ -1,6 +1,5 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, AnimationController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 
 @Component({

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController, AlertController } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -17,8 +18,14 @@ export class LoginPage {
   constructor(
     private router: Router,
     private toastController: ToastController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private menuCtrl: MenuController,
   ) {}
+
+  // Cerrar Menú al navegar
+  ngOnInit() {
+    this.menuCtrl.close("main-menu");
+  }
 
   // Mostrar toast de inicio de sesión
   async mostrarToasts() {
