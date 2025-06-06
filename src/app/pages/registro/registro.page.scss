@@ -1,0 +1,181 @@
+.register-button {
+    width: 80%; // Ancho del botón
+    font-size: 1.2rem; // Tamaño de fuente
+    padding: 6px 24px; // Espaciado interno
+    transition: transform 0.2s ease-in-out; // Suaviza el efecto de transformación
+    margin: 5px auto; // Margen centrado
+    display: block; // Comportamiento de bloque
+    --background: #c29b9bf8; // Color de fondo personalizado
+    --color: white; // Color del texto
+  }
+
+ion-button.register-button:hover {
+    transform: scale(1.1);
+  }
+
+
+.vinculo, h1, .label {
+  color: #c29b9bf8; // Color café personalizado
+  font-weight: bold; // Negrita
+}
+
+.logo {
+  width: 150px; // Tamaño del logo
+  display: block; // Comportamiento de bloque
+  margin: auto; // Centrado horizontal
+  margin-top: -20px; // Ajuste de margen superior
+  margin-bottom: -20px; // Sin padding para ocupar todo el espacio
+}
+ ion-content {
+    --background: transparent !important; // Fondo transparente para mostrar imagen
+    display: flex; // Flexbox para centrado
+    flex-direction: column; // Elementos en columna
+    align-items: center; // Centrado horizontal
+    justify-content: center; // Centrado vertical
+    height: 100%; // Altura del contenedor
+    color: #333; // Texto oscuro
+    text-align: center; // Texto centrado
+    box-sizing: border-box; // Padding incluido en tamaño total
+    position: relative; // Necesario para contenido superpuesto
+    z-index: 1; // Por encima del fondo
+} 
+
+ion-card {
+    background: transparent; // Fondo transparente
+    align-items: center; // Centrado horizontal
+    justify-content: center; // Centrado vertical
+    display: flex; // Flexbox
+    flex-direction: column; // Elementos en columna
+    color: #333; // Texto oscuro
+    text-align: center; // Centrado
+    box-sizing: border-box; // Padding incluido
+    border-radius: 10px; // Bordes redondeados
+}
+
+ion-list { //contenedor principal
+  width: 95%; // Ancho del listado
+  height: 100%; // Altura del listado
+  margin: auto; // Centrado automático (horizontal y vertical si el contenedor lo permite)
+  border-radius: 10px; // Bordes redondeados
+  box-sizing: border-box; // Incluye padding en el tamaño total
+}
+
+ion-text {
+  font-size: 16px; // Tamaño de fuente del texto
+}
+
+ion-card-title{
+    font-size: 25px; // Tamaño de fuente del título
+    font-weight: bold; // Negrita
+}
+
+ion-label {
+  margin-bottom: 10px; // Margen inferior para separación
+}
+
+ion-card-header {
+  display: flex; // Flexbox para layout
+  flex-direction: column; // Elementos en columna
+  background: transparent; // Fondo transparente
+  align-self: auto; // Alineación automática
+  position: top; // Posición en la parte superior (nota: 'top' no es un valor válido para position)
+  display: block; // Comportamiento de bloque para centrado con margin
+  box-sizing: border-box; // Padding incluido en tamaño total
+}
+
+ion-content::before {
+  content: ""; // Elemento vacío para fondo
+  position: absolute; // Posición absoluta
+  top: 0; // Arriba
+  left: 0; // Izquierda
+  width: 100%; // Ancho completo
+  height: 100%; // Altura completa
+  background-image: url('/assets/images/background.jpg'); // Imagen de fondo
+  background-size: cover; // Cubrir todo el área
+  background-position: center; // Centrado de la imagen
+  background-repeat: no-repeat; // Sin repetición
+  z-index: -1; // Por detrás del contenido
+}
+
+ion-item {
+  width: 90%; // Ancho del item
+  margin: auto; // Centrado horizontal
+  box-sizing: border-box; // Padding incluido en tamaño total
+}
+ion-item.item-has-focus {
+  border: none !important; // Sin borde al enfocar
+  box-shadow: none !important; // Sin sombra al enfocar
+}
+
+ion-footer {
+  position: absolute; // Lo saca del flujo normal y lo coloca fijo
+  bottom: 0;          // Lo fija al fondo de la página
+  width: 100%;        // Que cubra todo el ancho
+  z-index: 2;         // Asegura que esté encima de fondos u otros elementos
+  margin-top: 100px; // Margen superior para separar del contenido principal
+}
+
+
+mat-card-header {
+  padding: auto; // Ajuste automático de padding
+  align-self: center; // Centra el header dentro del card
+}
+
+mat-card {
+  background-color: #ffffff2c; // Fondo semi-transparente para el card
+  border-radius: 20px; // Bordes redondeados para suavizar el diseño
+  box-sizing: border-box; // Incluye padding en el tamaño
+  height: fit-content; // Ajusta la altura al contenido
+  width: fit-content; // Ajusta el ancho al contenido
+  margin: 20px auto; // Centra el card con margen automático
+ 
+}
+
+.ion-padding {
+  padding: auto; // Ajuste automático de padding
+  background-color: #c29b9bf8; // Fondo azul translúcido para secciones con padding
+}
+
+mat-card-title {
+  font-size: 24px; // Tamaño grande para título en cards
+  font-weight: bold; // Negrita para destacar
+  color: #ffffff; // Texto blanco para contraste
+}
+
+
+.main {
+  display: flex; // Usa flexbox para centrar el contenido
+  flex-direction: column; // Apila los elementos en columna
+  align-items: center; // Centra los elementos horizontalmente
+  justify-content: center; // Centra los elementos verticalmente
+  height: 100%; // Altura del contenedor principal
+  background-color: #fffffff3; // Fondo blanco translúcido
+  padding: 0 16px; /* Espacio horizontal alrededor del contenido */
+  color: #333; // Color de texto oscuro
+  text-align: center; // Centra el texto
+  box-sizing: border-box; // Incluye el padding en el tamaño total
+  border-radius: 40px; // Bordes redondeados
+  
+}
+
+.selector {
+  margin-top: 5%;
+  width: 80% ;
+  box-sizing: border-box;
+}
+
+h2 {
+  font-size: 18px; // Tamaño de fuente para subtítulos
+  margin-top: 0px; // Margen superior para separación
+  color: #c29b9bf8; // Color café personalizado
+  font-weight: bold; // Negrita para destacar
+}
+
+.icon8 {
+  width: 60px; // Ancho fijo
+  height: 60px; // Alto fijo
+  margin: 10px auto; // Centrado con margen
+  object-fit: cover; // Ajuste de la imagen dentro del contenedor
+  display: block; // Comportamiento de bloque
+  margin-bottom: -2px; // Ajuste de margen inferior para alineación
+}
