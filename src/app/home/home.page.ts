@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, AnimationController } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +31,7 @@ export class HomePage {
     private router: Router,
     private alertController: AlertController,
     private animationCtrl: AnimationController,
+    private menuCtrl: MenuController,
   ) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as { user: string };
@@ -37,6 +39,11 @@ export class HomePage {
     if (state?.user) {
       this.user = state.user;
     }
+  }
+
+  // Cerrar Menú al navegar
+  ngOnInit() {
+    this.menuCtrl.close("main-menu");
   }
 
   // Método LIMPIAR con animación

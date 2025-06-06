@@ -70,7 +70,11 @@ mat-card-header {
 mat-card {
   background-color: #ffffff2c; // Fondo semi-transparente para el card
   border-radius: 20px; // Bordes redondeados para suavizar el diseño
-  
+  box-sizing: border-box; // Incluye padding en el tamaño
+  height: fit-content; // Ajusta la altura al contenido
+  width: fit-content; // Ajusta el ancho al contenido
+  margin: 20px auto; // Centra el card con margen automático
+ 
 }
 
 
