@@ -9,11 +9,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOption } from '@angular/material/core';
 
 import { AboutPageRoutingModule } from './about-routing.module';
+import { SharedModule } from '../../shared/shared.module';
+
 
 
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     FormsModule,
     IonicModule,
     AboutPageRoutingModule,
@@ -22,7 +25,7 @@ import { AboutPageRoutingModule } from './about-routing.module';
     MatFormFieldModule,
     MatOption,
   ],
-  declarations: [AboutPage,]
+  declarations: [AboutPage]
 })
 export class AboutPageModule {
 

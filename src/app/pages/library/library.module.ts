@@ -9,10 +9,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOption } from '@angular/material/core';
 
 import { LibraryPage } from './library.page';
+import { SharedModule } from '../../shared/shared.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     FormsModule,
     IonicModule,
     LibraryPageRoutingModule,

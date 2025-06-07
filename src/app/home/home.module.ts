@@ -12,13 +12,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 
 
-
 import { HomePageRoutingModule } from './home-routing.module';
-
+import { SharedModule } from '../shared/shared.module'; // Importar SharedModule
 
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
@@ -29,7 +29,7 @@ import { HomePageRoutingModule } from './home-routing.module';
     MatNativeDateModule,
     MatDatepickerModule,
     MatSelectModule,
-  ],
-  declarations: [HomePage,]
+    ],
+    declarations: [HomePage],
 })
 export class HomePageModule {}

@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOption } from '@angular/material/core';
+import { SharedModule } from '../../shared/shared.module';
 
 
 import { InicioPage } from './inicio.page';
@@ -14,6 +15,7 @@ import { InicioPage } from './inicio.page';
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     FormsModule,
     IonicModule,
     InicioPageRoutingModule,
