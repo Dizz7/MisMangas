@@ -20,21 +20,26 @@
     </mat-card>
     
     <div style="padding: 16px;">
-      <h2 class="subtitulo">Información Adicional</h2>
+      <h2 class="subtitulo">Información del usuario</h2>
 
       <div #nombreField class="nombreInput">
         <ion-label>Nombre</ion-label>
-        <ion-input [(ngModel)]="nombre" placeholder=""></ion-input>
+        <ion-input [(ngModel)]="nombre"></ion-input>
       </div>
       <div #apellidoField class="apellidoInput">
         <ion-label>Apellido</ion-label>
-        <ion-input [(ngModel)]="apellido" placeholder=""></ion-input>
+        <ion-input [(ngModel)]="apellido"></ion-input>
+      </div>
+
+      <div #emailField class="emailInput">
+        <ion-label>Correo</ion-label>
+        <ion-input [(ngModel)]="email"></ion-input>
       </div>
       
     
       <mat-form-field appearance="fill" style="width: 100%; margin-top: 10px;">
         <mat-label>Nivel de Educación</mat-label>
-        <mat-select [(ngModel)]="educacion" placeholder="Seleccione Nivel">
+        <mat-select [(ngModel)]="educacion">
           <mat-option *ngFor="let nivel of nivelesEducacion" [value]="nivel">
             {{ nivel }}
           </mat-option>
@@ -43,7 +48,7 @@
     
       <mat-form-field appearance="fill">
         <mat-label>Fecha de Nacimiento</mat-label>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="nacimiento" placeholder="dd/mm/yyyy">
+        <input matInput [matDatepicker]="picker" [(ngModel)]="nacimiento">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -52,6 +57,7 @@
       <div class="btns">
         <button mat-raised-button class="btn-custom" (click)="limpiar()">Limpiar</button>
         <button mat-raised-button class="btn-custom" (click)="mostrar()">Mostrar</button>
+        <button mat-raised-button color="primary" class="btn-custom" (click)="guardar()">Guardar</button>
       </div>
     </div>
   </ion-card>
@@ -67,4 +73,3 @@
       </ion-title>
     </ion-toolbar>
   </ion-footer>
-

@@ -88,8 +88,47 @@ validarUsuario(user: string): boolean {
       return;
     }
 
+    // Comprobar usuario y contraseña pasados desde el registro (si existen)
+    const navigation = this.router.getCurrentNavigation();
+    let state = navigation?.extras?.state;
+
+    if (state) {
+      const registroUser = state['user'];
+      const registroPass = state['password'];
+
+      if (this.user !== registroUser || this.password !== registroPass) {
+        this.mostrarError('Usuario o contraseña incorrectos.');
+        return;
+      }
+    }
+    else {
+      const guardado = localStorage.getItem('perfil');
+      if (guardado) {
+        const datos = JSON.parse(guardado);
+        if (this.user !== datos.user || this.password !== datos.password) {
+          this.mostrarError('Usuario o contraseña incorrectos.');
+          return;
+        }
+        // Reasignar datos al state simulado para pasarlos a la siguiente pantalla
+        state = datos;
+      } else {
+        this.mostrarError('No hay datos de registro disponibles.');
+        return;
+      }
+    }
+
     // Si todo es correcto
     await this.mostrarToasts();
-    this.router.navigate(['/home'], { state: { user: this.user } });
+    this.router.navigate(['/home'], {
+      state: {
+        user: this.user,
+        password: this.password,
+        nombre: state?.['nombre'],
+        apellido: state?.['apellido'],
+        email: state?.['email'],
+        nacimiento: state?.['nacimiento'],
+        educacion: state?.['educacion']
+      }
+    });
   }
 }

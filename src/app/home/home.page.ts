@@ -15,6 +15,8 @@ export class HomePage {
   apellido: string = '';
   educacion: string = '';
   nacimiento: Date | null = null;
+  email: string = '';
+  password: string = '';
 
   nivelesEducacion: string[] = [
     'Básica',
@@ -26,6 +28,7 @@ export class HomePage {
 
   @ViewChild('nombreField', { static: false }) nombreField!: ElementRef;
   @ViewChild('apellidoField', { static: false }) apellidoField!: ElementRef;
+  @ViewChild('emailField', { static: false }) emailField!: ElementRef;
 
   constructor(
     private router: Router,
@@ -33,17 +36,46 @@ export class HomePage {
     private animationCtrl: AnimationController,
     private menuCtrl: MenuController,
   ) {
-    const navigation = this.router.getCurrentNavigation();
-    const state = navigation?.extras.state as { user: string };
-
-    if (state?.user) {
-      this.user = state.user;
-    }
   }
 
   // Cerrar Menú al navegar
   ngOnInit() {
     this.menuCtrl.close("main-menu");
+
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras?.state;
+
+    if (state) {
+      this.user = state['user'] || '';
+      this.password = state['password'] || '';
+      this.nombre = state['nombre'] || '';
+      this.apellido = state['apellido'] || '';
+      this.email = state['email'] || '';
+      this.nacimiento = state['nacimiento'] ? new Date(state['nacimiento']) : null;
+      this.educacion = state['educacion'] || '';
+
+      localStorage.setItem('perfil', JSON.stringify({
+        user: this.user,
+        password: this.password,
+        nombre: this.nombre,
+        apellido: this.apellido,
+        email: this.email,
+        nacimiento: this.nacimiento,
+        educacion: this.educacion
+      }));
+    } else {
+      const guardado = localStorage.getItem('perfil');
+      if (guardado) {
+        const datos = JSON.parse(guardado);
+        this.user = datos.user || '';
+        this.password = datos.password || '';
+        this.nombre = datos.nombre || '';
+        this.apellido = datos.apellido || '';
+        this.email = datos.email || '';
+        this.nacimiento = datos.nacimiento ? new Date(datos.nacimiento) : null;
+        this.educacion = datos.educacion || '';
+      }
+    }
   }
 
   // Método LIMPIAR con animación
@@ -52,9 +84,11 @@ export class HomePage {
     this.apellido = '';
     this.educacion = '';
     this.nacimiento = null;
+    this.email = '';
   
     this.animarCampo(this.nombreField);
     this.animarCampo(this.apellidoField);
+    this.animarCampo(this.emailField);
   }
   
   animarCampo(elementRef: ElementRef) {
@@ -102,5 +136,83 @@ export class HomePage {
     }
 
     await this.mostrarInfo(`Su nombre es ${this.nombre} ${this.apellido}.`);
+  }
+  cerrarSesion() {
+    localStorage.removeItem('perfil');
+    this.router.navigate(['/login']);
+  }
+  async guardar() {
+    // Validar usuario
+    if (!this.user) {
+      await this.mostrarInfo('Ingrese un usuario.');
+      return;
+    }
+    if (this.user.length < 3 || this.user.length > 8) {
+      await this.mostrarInfo('El usuario debe tener entre 3 y 8 caracteres.');
+      return;
+    }
+    if (!/^[a-zA-Z0-9]{3,8}$/.test(this.user)) {
+      await this.mostrarInfo('El usuario ingresado no es válido. Debe ser alfanumérico.');
+      return;
+    }
+  
+    // Validar nombre y apellido
+    if (!this.nombre) {
+      await this.mostrarInfo('Ingrese su nombre.');
+      return;
+    }
+    if (!this.apellido) {
+      await this.mostrarInfo('Ingrese su apellido.');
+      return;
+    }
+  
+    // Validar correo
+    if (!this.email) {
+      await this.mostrarInfo('Ingrese un correo electrónico.');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)) {
+      await this.mostrarInfo('El correo electrónico ingresado no es válido.');
+      return;
+    }
+  
+    // Validar password
+    if (!this.password) {
+      await this.mostrarInfo('Ingrese la contraseña.');
+      return;
+    }
+    if (this.password.length !== 4) {
+      await this.mostrarInfo('La contraseña debe tener exactamente 4 dígitos.');
+      return;
+    }
+    if (!/^\d+$/.test(this.password)) {
+      await this.mostrarInfo('La contraseña sólo puede contener dígitos.');
+      return;
+    }
+  
+    // Validar nivel de educación
+    if (!this.educacion) {
+      await this.mostrarInfo('Seleccione un nivel de educación.');
+      return;
+    }
+  
+    // Validar fecha de nacimiento
+    if (!this.nacimiento) {
+      await this.mostrarInfo('Ingrese su fecha de nacimiento.');
+      return;
+    }
+  
+    // Si pasa todas las validaciones, guardar datos
+    localStorage.setItem('perfil', JSON.stringify({
+      user: this.user,
+      password: this.password,
+      nombre: this.nombre,
+      apellido: this.apellido,
+      email: this.email,
+      nacimiento: this.nacimiento,
+      educacion: this.educacion
+    }));
+  
+    await this.mostrarInfo('Datos guardados correctamente.');
   }
 }
