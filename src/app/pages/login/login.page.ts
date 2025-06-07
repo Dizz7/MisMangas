@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController, AlertController } from '@ionic/angular';
+import { ToastController, AlertController, AnimationController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,13 @@ export class LoginPage {
     private toastController: ToastController,
     private alertController: AlertController,
     private menuCtrl: MenuController,
+    private animationCtrl: AnimationController,
   ) {}
+
+  @ViewChild('fotoLogo', { static: true }) fotoLogo!: ElementRef;
+
+
+
 
   // Cerrar Menú al navegar
   ngOnInit() {

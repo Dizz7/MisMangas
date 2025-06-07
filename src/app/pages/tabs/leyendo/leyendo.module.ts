@@ -9,13 +9,14 @@ import { LeyendoPageRoutingModule } from './leyendo-routing.module';
 import { LeyendoPage } from './leyendo.page';
 import { SharedModule } from '../../../shared/shared.module';
 
+
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     FormsModule,
     IonicModule,
-    LeyendoPageRoutingModule
+    LeyendoPageRoutingModule,
   ],
   declarations: [LeyendoPage]
 })

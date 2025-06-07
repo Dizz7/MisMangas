@@ -16,19 +16,31 @@
 
 
 .vinculo, h1, .label {
-  color: #c29b9bf8; // Color azul personalizado
+  color: #c29b9bf8; // Color café personalizado
   font-weight: bold; // Negrita
 }
 
 .logo {
-  width: 200px; // Tamaño del logo
-  display: block; // Comportamiento de bloque
-  padding: auto; // Ajuste automático (no recomendado)
-  margin: auto; // Centrado horizontal
-  margin-bottom: 50%;
+  width: 200px;
+  display: block;
+  margin: auto;
   margin-top: 40%;
+  margin-bottom: 50%;
+  transition: transform 0.3s ease;
+
+/* Aplica la animación siempre */
+  animation: bounce 1s linear infinite;
 }
 
+/* Definición de la animación */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
 
  ion-content {
     --background: transparent !important; // Fondo transparente para mostrar imagen

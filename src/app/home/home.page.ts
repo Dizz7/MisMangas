@@ -29,6 +29,9 @@ export class HomePage {
   @ViewChild('nombreField', { static: false }) nombreField!: ElementRef;
   @ViewChild('apellidoField', { static: false }) apellidoField!: ElementRef;
   @ViewChild('emailField', { static: false }) emailField!: ElementRef;
+  @ViewChild('fotoPerfil', { static: true }) fotoPerfil!: ElementRef;
+  @ViewChild('usuarioTexto', { static: true }) usuarioTexto!: ElementRef;
+
 
   constructor(
     private router: Router,
@@ -36,6 +39,34 @@ export class HomePage {
     private animationCtrl: AnimationController,
     private menuCtrl: MenuController,
   ) {
+  }
+
+  ngAfterViewInit() {
+    // Animación de la foto de perfil
+    const animation = this.animationCtrl.create()
+      .addElement(this.fotoPerfil.nativeElement)
+      .duration(2500)
+      .iterations(Infinity)
+      .keyframes([
+        { offset: 0, transform: 'scale(0.9)', opacity: '1' },
+        { offset: 0.5, transform: 'scale(1.3)', opacity: '1' },
+        { offset: 1, transform: 'scale(0.9)', opacity: '1' }
+      ]);
+
+    animation.play();
+    
+
+      // Animación para el texto de usuario
+    const animTexto = this.animationCtrl.create()
+      .addElement(this.usuarioTexto.nativeElement)
+      .duration(3000)
+      .iterations(Infinity)
+      .keyframes([
+        { offset: 0, transform: 'translateX(-10px)', opacity: '1' },
+        { offset: 0.5, transform: 'translateX(10px)', opacity: '1' },
+        { offset: 1, transform: 'translateX(-10px)', opacity: '1' }
+      ]);
+    animTexto.play();
   }
 
   // Cerrar Menú al navegar

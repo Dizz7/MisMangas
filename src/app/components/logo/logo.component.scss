@@ -1,6 +1,49 @@
-.logo {
-    width: 100px; // Ancho del logo
-    margin-left: auto; // Empuja a la derecha
-    margin-right: 16px; // Separación del borde derecho
-    display: block; // Elimina espacio extra por inline
+/* Contenedor del logo: define el tamaño y la perspectiva 3D */
+.logo-container {
+  width: 100px;                /* Ancho fijo del contenedor */
+  height: 100px;               /* Alto fijo del contenedor */
+  margin-left: auto;           /* Empuja el elemento hacia la derecha */
+  margin-right: 3%;            /* Deja un pequeño espacio desde el borde derecho */
+  perspective: 1000px;         /* Profundidad para el efecto 3D al rotar */
+}
+
+/* Elemento interior que rotará en 3D */
+.logo-inner {
+  width: 100%;                 /* Ocupa todo el ancho del contenedor */
+  height: 100%;                /* Ocupa todo el alto del contenedor */
+  position: relative;          /* Necesario para posicionar las caras (front y back) */
+  transform-style: preserve-3d; /* Mantiene la perspectiva 3D en sus hijos */
+}
+
+/* Aplica animación de rotación solo cuando el usuario pasa el mouse sobre el contenedor */
+.logo-container:hover .logo-inner {
+  animation: rotateY 2s linear infinite; /* Rota continuamente sobre el eje Y */
+}
+
+/* Caras del logo (frontal y trasera) */
+.logo-face {
+  width: 100%;                 /* Ocupan el mismo tamaño que el contenedor */
+  height: 100%;
+  position: absolute;          /* Se superponen una sobre otra */
+  backface-visibility: hidden; /* Oculta la cara trasera cuando no está de frente */
+}
+
+/* Cara frontal del logo */
+.front {
+  transform: rotateY(0deg);    /* Sin rotación: es la que se ve por defecto */
+}
+
+/* Cara trasera del logo */
+.back {
+  transform: rotateY(180deg);  /* Volteada horizontalmente (detrás de la frontal) */
+}
+
+/* Definición de la animación que rota en el eje Y */
+@keyframes rotateY {
+  from {
+    transform: rotateY(0deg);  /* Inicia sin rotación */
   }
+  to {
+    transform: rotateY(360deg); /* Da una vuelta completa */
+  }
+}

@@ -111,13 +111,24 @@
   
   
   .foto-recuperar{
-    width: 100px; // Ancho fijo
-    height: 100px; // Alto fijo
+    width: 150px; // Ancho fijo
+    height: 150px; // Alto fijo
     margin: 5px auto; // Centrado con margen
     object-fit: cover; // Ajuste de la imagen dentro del contenedor
     border: 5px solid #ffffff; // Borde blanco
     display: block; // Comportamiento de bloque
+    animation: pulse 2s ease-in-out infinite; // Animación de pulso suave
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(0.9);
   }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
   
   .btn-custom {
     background: #c29b9bf8 !important; // Fondo personalizado
@@ -134,5 +145,5 @@
     font-size: 20px; // Tamaño de fuente para subtítulos
     margin-top: 10px; // Margen superior para separación
     font-weight: bold; // Negrita para destacar
+    color: #c29b9bf8; // Color negro para el texto
   }
-  

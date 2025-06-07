@@ -106,9 +106,27 @@ mat-card-title {
   .foto-about {
     width: 150px; // Ancho de la imagen
     height: 150px; // Altura de la imagen
-    margin-bottom: 16px; // Espacio debajo de la imagen
+    margin: 5px auto; // Centrado con margen
     object-fit: cover; // Asegura que la imagen cubra el área sin distorsión
+    animation: pulse 2s ease-in-out infinite; // Animación de pulso suave
   }
 
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
 
-  
+  .subtitulo {
+    font-size: 20px; // Tamaño de fuente para subtítulos
+    margin-top: 10px; // Margen superior para separación
+    font-weight: bold; // Negrita para destacar
+  }
+
+  .vinculo, .subtitulo {
+    color: #c29b9bf8; // Color café personalizado
+    font-weight: bold; // Negrita
+  }
