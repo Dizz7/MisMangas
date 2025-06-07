@@ -14,7 +14,7 @@ ion-card {
   }
   
 ion-content::part(scroll) {
-    background-image: url('../../../assets/images/background.jpg'); // Imagen de fondo
+    background-image: url('/../../assets/images/background.jpg'); // Imagen de fondo
     background-size: cover; // Escala la imagen para cubrir todo
     background-position: center; // Centra la imagen
     background-repeat: no-repeat; // No repetir la imagen
@@ -47,6 +47,7 @@ div{
   
 .titulo-principal {
     font-weight: bold; // Texto en negrita para destacar el título
+    margin-bottom: 10%; // Mueve el título hacia arriba
   }
   
   
@@ -92,6 +93,22 @@ mat-card-title {
   }
   
 
+  mat-card {
+    background-color: #ffffff2c; // Fondo semi-transparente para el card
+    border-radius: 20px; // Bordes redondeados para suavizar el diseño
+    box-sizing: border-box; // Incluye padding en el tamaño
+    height: fit-content; // Ajusta la altura al contenido
+    width: fit-content; // Ajusta el ancho al contenido
+    margin: 20px auto; // Centra el card con margen automático
+   
+  }
+
+  .foto-about {
+    width: 150px; // Ancho de la imagen
+    height: 150px; // Altura de la imagen
+    margin-bottom: 16px; // Espacio debajo de la imagen
+    object-fit: cover; // Asegura que la imagen cubra el área sin distorsión
+  }
 
 
   

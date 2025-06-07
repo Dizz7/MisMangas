@@ -1,0 +1,38 @@
+
+ion-card {
+    display: flex; // Usa flexbox para centrar el contenido
+    flex-direction: column; // Apila los elementos en columna
+    align-items: center; // Centra los elementos horizontalmente
+    justify-content: center; // Centra los elementos verticalmente
+    height: 95%; // Altura del contenedor principal
+    background-color: #fffffff3; // Fondo blanco translúcido
+    padding: 0 16px; /* Espacio horizontal alrededor del contenido */
+    color: #333; // Color de texto oscuro
+    text-align: center; // Centra el texto
+    box-sizing: border-box; // Incluye el padding en el tamaño total
+    border-radius: 10px; // Bordes redondeados
+  }
+  
+ion-content::part(scroll) {
+    background-image: url('/../../assets/images/background.jpg'); // Imagen de fondo
+    background-size: cover; // Escala la imagen para cubrir todo
+    background-position: center; // Centra la imagen
+    background-repeat: no-repeat; // No repetir la imagen
+  
+  }
+  
+ion-content {
+    display: flex; // Flexbox para el layout principal
+    position: relative; // Necesario para posicionamiento interno
+    height: 100%; // Altura completa
+    padding: 0 16px; // Padding lateral
+    color: #333; // Color del texto
+    text-align: center; // Centrado de texto
+    box-sizing: border-box; // Incluye padding en el tamaño
+  }
+  
+  
+  
+
+
+  

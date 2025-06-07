@@ -92,6 +92,29 @@ mat-card-title {
   }
   
 
+ion-tab-bar {
+  --background: #c29b9bf8;
+  height: 60px; // Altura del tab bar
+  }
 
+.btn-tab{
+  color: #ffffff !important; // Texto blanco para contraste
+  margin-top: 10px; // Espacio vertical alrededor del botón
+  margin-bottom: 10px; // Espacio vertical alrededor del botón
+  font-size: 16px; // Tamaño del texto
+  font-weight: bold; // Texto en negrita
+  transition: background 0.3s, transform 0.3s; // Transiciones suaves
+  --color-selected: #ffffff; // Color del icono seleccionado
+}
 
-  
+.btn-tab:hover, ion-icon {
+  background: #ff000013 !important; // Fondo semi-transparente al pasar el mouse
+  transform: scale(1.05); // Efecto de zoom al pasar el mouse
+  color: #ffffff;
+}
+
+.btn-tab:focus, ion-label {
+  outline: none; // Elimina el borde de enfoque
+  color: #ffffff; // Texto blanco al enfocar
+}
+

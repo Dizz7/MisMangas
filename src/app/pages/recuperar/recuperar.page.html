@@ -1,22 +1,59 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>recuperar</ion-title>
+<ion-header>
+  <ion-toolbar class="custom-header-toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button></ion-buttons>
+      <app-logo></app-logo> <!--componente logo-->
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">recuperar</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="home">
+  <ion-card id="main">
+
+    <mat-card class="ion-padding" color="primary" style="padding-top: 20px;">
+
+      <mat-card-content>
+        <img src="/assets/images/icon7.png" alt="Perfil Usuario" class="foto-recuperar" />
+      </mat-card-content>
+    </mat-card>
+    
+    <div style="padding: 16px;">
+      <h2 class="subtitulo">Cambiar contraseña</h2>
+
+    <ion-list>
+
+      <ion-item>
+        <ion-label class="label" position="stacked">Ingrese su Usuario</ion-label>
+        <ion-input [(ngModel)]="user" placeholder ="nombre de usuario" type="user" class="input1"></ion-input>
+      </ion-item>      
+
+      <ion-item>
+        <ion-label class="label" position="stacked">Nueva Contraseña</ion-label>
+        <ion-input [(ngModel)]="password" placeholder ="●●●●" type="password" class="input2"></ion-input>
+      </ion-item>      
+      <ion-item>
+        <ion-label class="label" position="stacked">Repetir Contraseña</ion-label>
+        <ion-input [(ngModel)]="password2" placeholder ="●●●●" type="password" class="input3"></ion-input>
+      </ion-item>
+    </ion-list>
+    
+
+    
+
+      <div class="btns">
+        <button mat-raised-button class="btn-custom" (click)="goHome()">Volver</button>
+        <button mat-raised-button class="btn-custom" (click)="recuperar()">Guardar</button>
+      </div>
+    </div>
+  </ion-card>
+
 </ion-content>
 
 
-<ion-footer>
-  <ion-toolbar color="light">
-    <ion-title class="ion-text-center" size="small">
-      <app-footer></app-footer> <!--componente footer-->
-    </ion-title>
-  </ion-toolbar>
-</ion-footer>
+
+  <ion-footer>
+    <ion-toolbar color="light">
+      <ion-title class="ion-text-center" size="small">
+        <app-footer></app-footer> <!--componente footer-->
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>

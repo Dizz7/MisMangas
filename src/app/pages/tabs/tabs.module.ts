@@ -1,16 +1,17 @@
-import { NgModule } from '@angular/core';
+import {  NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { InicioPageRoutingModule } from './inicio-routing.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOption } from '@angular/material/core';
-import { SharedModule } from '../../shared/shared.module';
 
 
-import { InicioPage } from './inicio.page';
+import { TabsPageRoutingModule } from './tabs-routing.module';
+
+import { TabsPage } from './tabs.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -18,12 +19,12 @@ import { InicioPage } from './inicio.page';
     SharedModule,
     FormsModule,
     IonicModule,
-    InicioPageRoutingModule,
+    TabsPageRoutingModule,
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
     MatOption,
   ],
-  declarations: [InicioPage]
+  declarations: [TabsPage]
 })
-export class InicioPageModule {}
+export class TabsPageModule {}

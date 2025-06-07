@@ -29,12 +29,20 @@ const routes: Routes = [
     loadChildren: () => import('./pages/recuperar/recuperar.module').then( m => m.RecuperarPageModule)
   },
   {
-    path: 'library',
-    loadChildren: () => import('./pages/library/library.module').then( m => m.LibraryPageModule)
+    path: 'tabs',
+    loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule)
   },
   {
-    path: 'inicio',
-    loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
+    path: 'leyendo',
+    loadChildren: () => import('./pages/tabs/leyendo/leyendo.module').then( m => m.LeyendoPageModule)
+  },
+  {
+    path: 'por-leer',
+    loadChildren: () => import('./pages/tabs/por-leer/por-leer.module').then( m => m.PorLeerPageModule)
+  },
+  {
+    path: 'leidos',
+    loadChildren: () => import('./pages/tabs/leidos/leidos.module').then( m => m.LeidosPageModule)
   },
 ];
 
