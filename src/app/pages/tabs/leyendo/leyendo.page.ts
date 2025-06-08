@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, MenuController } from '@ionic/angular';
+import { AlertController, MenuController, ModalController } from '@ionic/angular';
+import { ImageModalComponent } from '../../../components/image-modal/image-modal.component';
 
 @Component({
   selector: 'app-leyendo',
@@ -12,7 +13,8 @@ export class LeyendoPage implements OnInit {
   mangas: any[] = [];
 
   constructor(private menuCtrl: MenuController,
-              private alertController: AlertController
+              private alertController: AlertController,
+              private modalCtrl: ModalController,
   ) {}
 
   ngOnInit() {
@@ -96,4 +98,16 @@ export class LeyendoPage implements OnInit {
     await alert.present();
   }
   
+  async abrirImagen(imagenUrl: string) {
+    const modal = await this.modalCtrl.create({
+      component: ImageModalComponent,
+      componentProps: {
+        imagen: imagenUrl
+      },
+      cssClass: 'fullscreen-modal'
+    });
+  
+    await modal.present();
+  }
+
 }

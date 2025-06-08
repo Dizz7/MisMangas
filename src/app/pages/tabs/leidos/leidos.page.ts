@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { AlertController, MenuController, ModalController } from '@ionic/angular';
+import { ImageModalComponent } from '../../../components/image-modal/image-modal.component';
 
 @Component({
   selector: 'app-leidos',
@@ -11,7 +12,9 @@ export class LeidosPage implements OnInit {
   estados: string[] = ['Leyendo', 'Leído', 'Por Leer', 'Abandonado'];
   mangas: any[] = [];
 
-  constructor(private menuCtrl: MenuController) {}
+  constructor(private menuCtrl: MenuController,
+              private modalCtrl: ModalController,
+  ) {}
 
   ngOnInit() {
     this.menuCtrl.close("main-menu");
@@ -33,5 +36,17 @@ export class LeidosPage implements OnInit {
   cambiarEstado(manga: any, nuevoEstado: string) {
     manga.estadoSeleccionado = nuevoEstado;
     localStorage.setItem('mangas', JSON.stringify(this.mangas));
+  }
+
+  async abrirImagen(imagenUrl: string) {
+    const modal = await this.modalCtrl.create({
+      component: ImageModalComponent,
+      componentProps: {
+        imagen: imagenUrl
+      },
+      cssClass: 'fullscreen-modal'
+    });
+  
+    await modal.present();
   }
 }

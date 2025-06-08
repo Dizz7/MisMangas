@@ -50,30 +50,65 @@ ion-item {
 }
 
 
+/* Estilo general para cada item de manga en la lista */
 .manga-item {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 16px;
-  border: 1px solid #333;
-  border-radius: 8px;
-  margin: 10px;
-}
+  display: flex;                          /* Usa flexbox para alinear los elementos hijos en una fila */
+  align-items: flex-start;                /* Alinea los elementos al inicio del eje vertical (arriba) */
+  justify-content: space-between;        /* Espacia los elementos horizontalmente (uno a la izquierda, otro a la derecha) */
+  padding: 16px;                          /* Relleno interno para dar espacio al contenido */
+  border: 1px solid #333;                 /* Borde oscuro alrededor del contenedor */
+  border-radius: 8px;                     /* Bordes redondeados */
+  margin: 10px;                           /* Espacio externo entre items */
+  }
 
+/* Estilo para la etiqueta del manga (nombre, volumen y selector de estado) */
 .manga-label {
-  flex: 1;
-}
+  flex: 1;                                /* Ocupa el mayor espacio disponible posible dentro del flex container */
+  }
 
+/* Estilo para la imagen del manga */
 .manga-img {
-  width: 150px;
-  height: 200px;
-  object-fit: cover;
-  margin-left: 12px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  width: 150px;                           /* Ancho fijo de la imagen */
+  height: 200px;                          /* Alto fijo de la imagen */
+  object-fit: cover;                      /* La imagen se recorta para cubrir el área, manteniendo proporciones */
+  margin-left: 5px;                       /* Margen a la izquierda para separarla del contenido textual */
+  border-radius: 4px;                     /* Bordes redondeados */
+  border: 1px solid #ccc;                 /* Borde gris claro alrededor de la imagen */
+  cursor: pointer;                        /* Cambia el cursor al pasar sobre la imagen (indica que es interactiva) */
+  transition: transform 0.2s ease;        /* Transición suave al aplicar transformaciones (como el efecto hover) */
+  }
+
+/* Efecto al pasar el mouse sobre la imagen */
+.manga-img:hover {
+transform: scale(1.05);                 /* Escala la imagen un poco para dar un efecto de "zoom suave" */
 }
 
+/* Estilo para el selector de estado del manga */
 .selector {
-  width: 80%;
-  margin-top: 10px;
+  width: 80%;                             /* El selector ocupa el 80% del ancho de su contenedor */
+  margin-top: 10px;                       /* Margen superior para separarlo del texto */
+  }
+.btn-custom {
+  background: #c29b9bf8 !important; // Fondo personalizado
+  color: #ffffff !important; // Texto blanco
+  border-radius: 20px; // Bordes redondeados
+  padding: 10px 20px; // Espaciado interno
+  margin: 10px; // Margen externo
+  font-size: 16px; // Tamaño del texto
+  font-weight: bold; // Texto en negrita
+  
+}
+
+
+::ng-deep .alert-custom {
+  --ion-text-color: #c29b9b !important; /* Cambia el color general del texto */
+  height: auto; /* Altura automática para adaptarse al contenido */
+  margin-top: 10px; /* Margen superior para separación */
+  margin-bottom: 10px;  /* Margen inferior para separación */
+  --background: white; /* Fondo blanco */
+  }
+
+::ng-deep.alert-button {
+  color: #c29b9b !important; /* Cambia el color del texto de los botones */
+  font-weight: bold; /* Texto en negrita */
 }

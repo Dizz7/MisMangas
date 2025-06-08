@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ImageModalComponent } from './components/image-modal/image-modal.component';
 
 
 
@@ -35,7 +36,7 @@ import { FormsModule } from '@angular/forms';
     MatDatepickerModule,
     MatSelectModule,
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, ImageModalComponent],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

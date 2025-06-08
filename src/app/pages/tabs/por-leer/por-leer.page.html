@@ -19,8 +19,12 @@
           </mat-form-field>
         </ion-label>
       
-        <img [src]="manga.imagen" alt="Imagen del manga" class="manga-img" />
+        <img [src]="manga.imagen"
+        alt="Imagen del manga"
+        class="manga-img"
+        (click)="abrirImagen(manga.imagen)" />
       </ion-item>
+
 
     </ion-list>
   </ion-card>
