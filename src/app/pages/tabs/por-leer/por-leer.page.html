@@ -7,8 +7,9 @@
       <ion-item *ngFor="let manga of mangasFiltrados">
         <ion-label>
           <h2>{{ manga.nombre }}</h2>
+          <br>
           <p>Volumen: {{ manga.volumen }}</p>
-      
+          <br>
           <mat-form-field appearance="fill">
             <mat-label>Estado</mat-label>
             <mat-select [(ngModel)]="manga.estadoSeleccionado" (selectionChange)="cambiarEstado(manga, $event.value)">
