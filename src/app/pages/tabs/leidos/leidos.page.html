@@ -1,37 +1,29 @@
 
 <ion-content class="home">
   <ion-card id="main">
-
-    <div style="padding: 16px;">
+    <ion-list>
       <h2 class="subtitulo">Leídos</h2>
 
-    <ion-list>
+      <ion-item *ngFor="let manga of mangasFiltrados">
+        <ion-label>
+          <h2>{{ manga.nombre }}</h2>
+          <p>Volumen: {{ manga.volumen }}</p>
+      
+          <mat-form-field appearance="fill">
+            <mat-label>Estado</mat-label>
+            <mat-select [(ngModel)]="manga.estadoSeleccionado" (selectionChange)="cambiarEstado(manga, $event.value)">
+              <mat-option *ngFor="let estado of estados" [value]="estado">
+                {{ estado }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ion-label>
+      
+        <img [src]="manga.imagen" alt="Imagen del manga" class="manga-img" />
+      </ion-item>
 
-      <ion-item>
-        <p style="text-align: justify;">
-          MisMangas es una aplicación diseñada para los amantes del manga, donde
-          puedes registrar tu progreso en los volúmenes de tu colección. 
-        <br><br>
-          Con una interfaz intuitiva y fácil de usar, MisMangas te permite acceder
-          a tu historial de lectura de tus mangas, agregar/quitar títulos, 
-          dejar puntuaciones según tu criterio y más funciones pensadas para el futuro.
-        <br><br>
-          Esta aplicación está en la etapa de propuesta y se encuentra en constante evolución, con actualizaciones regulares
-          para mejorar la experiencia del usuario y añadir nuevas funciones.
-        <br><br>
-          Si tienes alguna pregunta, comentario o sugerencia, no dudes en ponerte en contacto
-          con nosotros a través de <a href="https://github.com/Dizz7" class="vinculo" target="_blank">Github</a>.
-      </p>
-        
-      </ion-item>      
     </ion-list>
-    
-
-
-      <div class="btns">
-        
-      </div>
-    </div>
   </ion-card>
-
 </ion-content>
+
+

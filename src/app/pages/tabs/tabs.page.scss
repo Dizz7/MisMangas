@@ -118,6 +118,10 @@ ion-tab-bar {
   color: #ffffff; // Texto blanco al enfocar
 }
 
+.btn-tab.tab-selected {
+  background-color: #822f2f6a; /* café más oscuro al estar en una tab */
+}
+
 .subtitulo {
   font-size: 20px; // Tamaño de fuente para subtítulos
   margin-top: 10px; // Margen superior para separación

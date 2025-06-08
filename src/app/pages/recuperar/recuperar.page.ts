@@ -79,6 +79,7 @@ export class RecuperarPage {
   // Mostrar información con alert
   async mostrarInfo(mensaje: string) {
     const alert = await this.alertController.create({
+      cssClass: 'alert-custom',
       header: 'Usuario',
       message: mensaje,
       buttons: ['OK']

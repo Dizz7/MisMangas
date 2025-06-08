@@ -8,7 +8,10 @@ import { LeyendoPageRoutingModule } from './leyendo-routing.module';
 
 import { LeyendoPage } from './leyendo.page';
 import { SharedModule } from '../../../shared/shared.module';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatLabel } from '@angular/material/form-field';
+import { MatOption } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   imports: [
@@ -17,6 +20,10 @@ import { SharedModule } from '../../../shared/shared.module';
     FormsModule,
     IonicModule,
     LeyendoPageRoutingModule,
+    MatFormFieldModule,
+    MatLabel,
+    MatOption,
+    MatSelectModule,
   ],
   declarations: [LeyendoPage]
 })

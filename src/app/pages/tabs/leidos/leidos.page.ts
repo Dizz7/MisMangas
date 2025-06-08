@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 
 @Component({
@@ -9,18 +8,30 @@ import { MenuController } from '@ionic/angular';
   standalone: false
 })
 export class LeidosPage implements OnInit {
+  estados: string[] = ['Leyendo', 'Leído', 'Por Leer', 'Abandonado'];
+  mangas: any[] = [];
 
-  constructor(
-    private router: Router, 
-    private menuCtrl: MenuController,
-  ) { 
-    const navigation = this.router.getCurrentNavigation();
-    const state = navigation?.extras.state as { user: string };
-  }
+  constructor(private menuCtrl: MenuController) {}
 
-  // Cerrar Menú al navegar
   ngOnInit() {
     this.menuCtrl.close("main-menu");
   }
 
+  ionViewWillEnter() {
+    this.menuCtrl.close("main-menu");
+
+    const guardados = localStorage.getItem('mangas');
+    if (guardados) {
+      this.mangas = JSON.parse(guardados);
+    }
+  }
+
+  get mangasFiltrados() {
+    return this.mangas.filter(m => m.estadoSeleccionado === 'Leído');
+  }
+
+  cambiarEstado(manga: any, nuevoEstado: string) {
+    manga.estadoSeleccionado = nuevoEstado;
+    localStorage.setItem('mangas', JSON.stringify(this.mangas));
+  }
 }

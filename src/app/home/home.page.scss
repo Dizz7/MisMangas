@@ -166,3 +166,15 @@ mat-card-title {
   color: #c29b9bf8; // Color negro para el texto
 }
 
+::ng-deep .alert-custom {
+  --ion-text-color: #c29b9b !important; /* Cambia el color general del texto */
+  height: auto; /* Altura automática para adaptarse al contenido */
+  margin-top: 10px; /* Margen superior para separación */
+  margin-bottom: 10px;  /* Margen inferior para separación */
+  --background: white; /* Fondo blanco */
+  }
+
+::ng-deep.alert-button {
+  color: #c29b9b !important; /* Cambia el color del texto de los botones */
+  font-weight: bold;
+}

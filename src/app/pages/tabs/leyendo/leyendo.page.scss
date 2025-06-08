@@ -2,10 +2,9 @@
 ion-card {
     display: flex; // Usa flexbox para centrar el contenido
     flex-direction: column; // Apila los elementos en columna
-    align-items: center; // Centra los elementos horizontalmente
-    justify-content: center; // Centra los elementos verticalmente
-    height: 95%; // Altura del contenedor principal
-    background-color: #fffffff3; // Fondo blanco translúcido
+    height: auto; // Altura del contenedor principal, se ajusta a los items
+    width: 95%;
+    background-color: #ffffff; // Fondo blanco translúcido
     padding: 0 16px; /* Espacio horizontal alrededor del contenido */
     color: #333; // Color de texto oscuro
     text-align: center; // Centra el texto
@@ -25,6 +24,7 @@ ion-content {
     display: flex; // Flexbox para el layout principal
     position: relative; // Necesario para posicionamiento interno
     height: 100%; // Altura completa
+    width: 100%; // Ancho completo
     padding: 0 16px; // Padding lateral
     color: #333; // Color del texto
     text-align: center; // Centrado de texto
@@ -40,4 +40,65 @@ ion-content {
     color: #c29b9bf8; // Color negro para el texto
   }
 
+  ion-item {
+    width: 95%;
+    height: auto;
+    border: 1px solid #333; /* Borde de 1px, sólido, color negro */
+    padding: 10px;
+    margin: 10px;
+    border-radius: 6px; /* (opcional) Bordes ligeramente redondeados */
+  }
+
+
+  .manga-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 16px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    margin: 10px;
+  }
   
+  .manga-label {
+    flex: 1;
+  }
+  
+  .manga-img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    margin-left: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .selector {
+    width: 80%;
+    margin-top: 10px;
+  }
+
+  .btn-custom {
+    background: #c29b9bf8 !important; // Fondo personalizado
+    color: #ffffff !important; // Texto blanco
+    border-radius: 20px; // Bordes redondeados
+    padding: 10px 20px; // Espaciado interno
+    margin: 10px; // Margen externo
+    font-size: 16px; // Tamaño del texto
+    font-weight: bold; // Texto en negrita
+    
+  }
+
+
+  ::ng-deep .alert-custom {
+    --ion-text-color: #c29b9b !important; /* Cambia el color general del texto */
+    height: auto; /* Altura automática para adaptarse al contenido */
+    margin-top: 10px; /* Margen superior para separación */
+    margin-bottom: 10px;  /* Margen inferior para separación */
+    --background: white; /* Fondo blanco */
+    }
+
+  ::ng-deep.alert-button {
+    color: #c29b9b !important; /* Cambia el color del texto de los botones */
+    font-weight: bold;
+  }
