@@ -23,6 +23,7 @@ export class LoginPage {
     private alertController: AlertController,
     private menuCtrl: MenuController,
     private animationCtrl: AnimationController,
+    private authService: AuthService
   ) {}
 
   @ViewChild('fotoLogo', { static: true }) fotoLogo!: ElementRef;
@@ -96,33 +97,18 @@ validarUsuario(user: string): boolean {
       return;
     }
 
-    // Comprobar usuario y contraseña pasados desde el registro (si existen)
-    const navigation = this.router.getCurrentNavigation();
-    let state = navigation?.extras?.state;
-
-    if (state) {
-      const registroUser = state['user'];
-      const registroPass = state['password'];
-
-      if (this.user !== registroUser || this.password !== registroPass) {
-        this.mostrarError('Usuario o contraseña incorrectos.');
-        return;
-      }
+    // Verificar usuario y contraseña en la base de datos usando AuthService
+    const esValido = await this.authService.loginUsuario(this.user, this.password);
+    if (!esValido) {
+      this.mostrarError('Usuario o contraseña incorrectos.');
+      return;
     }
-    else {
-      const guardado = localStorage.getItem('perfil');
-      if (guardado) {
-        const datos = JSON.parse(guardado);
-        if (this.user !== datos.user || this.password !== datos.password) {
-          this.mostrarError('Usuario o contraseña incorrectos.');
-          return;
-        }
-        // Reasignar datos al state simulado para pasarlos a la siguiente pantalla
-        state = datos;
-      } else {
-        this.mostrarError('No hay datos de registro disponibles.');
-        return;
-      }
+
+    // Obtener datos del perfil para continuar (si existen)
+    const guardado = localStorage.getItem('perfil');
+    let datos = null;
+    if (guardado) {
+      datos = JSON.parse(guardado);
     }
 
     // Si todo es correcto
@@ -131,11 +117,11 @@ validarUsuario(user: string): boolean {
       state: {
         user: this.user,
         password: this.password,
-        nombre: state?.['nombre'],
-        apellido: state?.['apellido'],
-        email: state?.['email'],
-        nacimiento: state?.['nacimiento'],
-        educacion: state?.['educacion']
+        nombre: datos?.nombre,
+        apellido: datos?.apellido,
+        email: datos?.email,
+        nacimiento: datos?.nacimiento,
+        educacion: datos?.educacion
       }
     });
   }

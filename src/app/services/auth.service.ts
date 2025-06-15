@@ -7,54 +7,68 @@ import { CapacitorSQLite, SQLiteConnection, SQLiteDBConnection } from '@capacito
   providedIn: 'root'
 })
 export class AuthService {
-
-  public dbInstance!: SQLiteDBConnection;
+  // Instancia de SQLiteConnection
+  private sqlite: SQLiteConnection;
+  private dbInstance: SQLiteDBConnection | undefined;
   
 
-  constructor() {}
-
-  async initializeDatabase() {
-    try {
-      const sqlite = new SQLiteConnection(CapacitorSQLite);
-      const db = await sqlite.createConnection('mismangas.db', false, 'no-encryption', 1, false);
+  constructor() {
+    this.sqlite = new SQLiteConnection(CapacitorSQLite);
+  }
+  // Inicializar la conexión a la base de datos
+  async initDB() {
+    if (!this.dbInstance) {
+      const db = await this.sqlite.createConnection('mismangas.db', false, 'no-encryption', 1, false);
       await db.open();
       this.dbInstance = db;
-      console.log('Database initialized successfully');
-
-      await this.createTables();
-    } catch (error) {
-      console.error('Error initializing database:', error);
+      await this.createTables(); // Crear tablas al inicializar la base de datos
     }
   }
 
-// Crear tablas con los nuevos campos
+  // Crear tablas necesarias
   async createTables() {
+    if (!this.dbInstance) {
+      throw new Error('La base de datos no fue inicializada correctamente.');
+    }
     await this.dbInstance.execute(
-      `CREATE TABLE IF NOT EXISTS users (
-      id INTEGER PRIMARY KEY,
-      usuario TEXT UNIQUE,
+      `CREATE TABLE IF NOT EXISTS usuarios (
+      user TEXT PRIMARY KEY,
       nombre TEXT,
       apellido TEXT,
-      email TEXT UNIQUE,
+      email TEXT,
       password TEXT,
-      nivel_educacion TEXT,
-      fecha_nacimiento TEXT
+      educacion TEXT,
+      nacimiento TEXT
     )`,
     );
   }
 
   // Método para registrar un nuevo usuario
-  async registerUser(usuario: string, nombre: string, apellido: string, email: string, password: string, nivel_educacion: string, fecha_nacimiento: string): Promise<void> {
+  async registerUser(user: string, nombre: string, apellido: string, email: string, password: string, educacion: string, nacimiento: string): Promise<void> {
+    await this.initDB(); // 👈 Asegúrate de llamar esto antes de usar dbInstance
 
-}
+    if (!this.dbInstance) {
+      throw new Error('La base de datos no fue inicializada correctamente.');
+    }
 
-/*  Método para registrar un nuevo usuario
-  async validarUsuario (usuario: string, password: string): Promise<boolean> {
-    const result = await this.dbInstance.execute(
-      'SELECT * FROM users WHERE usuario = ? AND password = ?',
-      [usuario, password]
+    await this.dbInstance.run(
+      `INSERT INTO usuarios (user, nombre, apellido, email, password, educacion, nacimiento)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [user, nombre, apellido, email, password, educacion, nacimiento]
     );
-    return result.rows.length > 0;
   }
-*/
+
+//  Método para login de usuario
+async loginUsuario(user: string, password: string): Promise<boolean> {
+  if (!this.dbInstance) {
+    await this.initDB();
+  }
+  const result = await this.dbInstance!.query(
+    'SELECT * FROM usuarios WHERE user = ? AND password = ?',
+    [user, password]
+  );
+
+  const values = result.values ?? [];
+  return values.length > 0;
+}
 }
