@@ -16,7 +16,7 @@ export class AuthService {
   async initializeDatabase() {
     try {
       const sqlite = new SQLiteConnection(CapacitorSQLite);
-      const db = await sqlite.createConnection('mismangas.db', false, 'no-encryption', 1);
+      const db = await sqlite.createConnection('mismangas.db', false, 'no-encryption', 1, false);
       await db.open();
       this.dbInstance = db;
       console.log('Database initialized successfully');
@@ -29,7 +29,7 @@ export class AuthService {
 
 // Crear tablas con los nuevos campos
   async createTables() {
-    await this.dbInstance.executeSql(
+    await this.dbInstance.execute(
       `CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY,
       usuario TEXT UNIQUE,
@@ -39,7 +39,7 @@ export class AuthService {
       password TEXT,
       nivel_educacion TEXT,
       fecha_nacimiento TEXT
-    )`, []
+    )`,
     );
   }
 
@@ -48,12 +48,13 @@ export class AuthService {
 
 }
 
+/*  Método para registrar un nuevo usuario
   async validarUsuario (usuario: string, password: string): Promise<boolean> {
-    const result = await this.dbInstance.executeSql(
+    const result = await this.dbInstance.execute(
       'SELECT * FROM users WHERE usuario = ? AND password = ?',
       [usuario, password]
     );
     return result.rows.length > 0;
   }
-
+*/
 }
