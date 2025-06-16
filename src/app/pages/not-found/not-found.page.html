@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar class="custom-header-toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button></ion-buttons>
+      <app-logo></app-logo> <!--componente logo-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="home">
+  <ion-card id="main">
+
+    <mat-card class="ion-padding" color="primary" style="padding-top: 20px;">
+
+      <mat-card-content>
+        <img src="/assets/images/icon7.png" alt="Perfil Usuario" class="foto-recuperar" />
+      </mat-card-content>
+    </mat-card>
+    
+    <div style="padding: 16px;">
+      <h2 class="subtitulo">Ruta no encontrada.</h2>
+
+    <ion-list>
+
+      <ion-item>
+        <ion-label class="label" position="stacked">Ingrese su Usuario</ion-label>
+       
+      </ion-item>      
+
+      <ion-item>
+        <ion-label class="label" position="stacked">Nueva Contraseña</ion-label>
+       
+      </ion-item>      
+      <ion-item>
+        <ion-label class="label" position="stacked">Repetir Contraseña</ion-label>
+       
+      </ion-item>
+    </ion-list>
+    
+
+    
+
+      <div class="btns">
+        <button mat-raised-button class="btn-custom" (click)="goHome()">Volver al inicio</button>
+      </div>
+    </div>
+  </ion-card>
+
+</ion-content>
+
+
+
+  <ion-footer>
+    <ion-toolbar color="light">
+      <ion-title class="ion-text-center" size="small">
+        <app-footer></app-footer> <!--componente footer-->
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>

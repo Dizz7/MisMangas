@@ -69,6 +69,23 @@ async loginUsuario(user: string, password: string): Promise<boolean> {
   );
 
   const values = result.values ?? [];
-  return values.length > 0;
+  const loginExitoso = values.length > 0;
+
+  if (loginExitoso) {
+    // Guarda al usuario como sesión activa
+    localStorage.setItem('usuario', user);
+  }
+
+  return loginExitoso;
+}
+
+// Método para revisar sesión activa
+isLoggedIn(): boolean {
+  return !!localStorage.getItem('usuario');
+}
+
+// Método para cerrar sesión
+logout(): void {
+  localStorage.removeItem('usuario');
 }
 }

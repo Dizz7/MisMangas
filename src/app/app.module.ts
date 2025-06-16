@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -37,7 +38,10 @@ import { ImageModalComponent } from './components/image-modal/image-modal.compon
     MatSelectModule,
   ],
   declarations: [AppComponent, ImageModalComponent],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Location
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {} 

@@ -44,6 +44,15 @@ const routes: Routes = [
     path: 'leidos',
     loadChildren: () => import('./pages/tabs/leidos/leidos.module').then( m => m.LeidosPageModule)
   },
+  {
+    path: 'not-found',
+    loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
+  }
+
 ];
 
 @NgModule({
