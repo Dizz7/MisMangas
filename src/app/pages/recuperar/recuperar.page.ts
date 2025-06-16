@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-recuperar',
@@ -32,6 +33,7 @@ export class RecuperarPage {
     private router: Router,
     private alertController: AlertController,
     private menuCtrl: MenuController,
+    private authService: AuthService,
   ) {
   }
 
@@ -73,6 +75,10 @@ export class RecuperarPage {
         this.educacion = datos.educacion || '';
       }
     }
+
+    if (!this.user) {
+      this.router.navigate(['/login']);
+    }
   }
 
 
@@ -97,51 +103,29 @@ export class RecuperarPage {
   
   // Guardar perfil en localStorage
   async recuperar() {
-    // Validar campos
-    if (!this.user) {
-      await this.mostrarInfo('Debe ingresar su nombre de usuario.');
-      return;
-    }
-  
     if (!this.password || !this.password2) {
-      await this.mostrarInfo('Debe completar ambos campos de la contraseña.');
+      await this.mostrarInfo('Complete ambos campos de contraseña');
       return;
     }
 
-  
     if (this.password.length !== 4 || !/^\d+$/.test(this.password)) {
       await this.mostrarInfo('La contraseña debe tener exactamente 4 dígitos numéricos.');
       return;
     }
-  
+
     if (this.password !== this.password2) {
-      await this.mostrarInfo('Las contraseñas no coinciden.');
+      await this.mostrarInfo('Las contraseñas no coinciden');
       return;
     }
-  
-    // Obtener el perfil desde localStorage
-    const perfilGuardado = localStorage.getItem('perfil');
-    if (!perfilGuardado) {
-      await this.mostrarInfo('No se encontró ningún perfil guardado.');
-      return;
+
+    // Suponemos que this.user contiene el usuario logueado
+    const actualizado = await this.authService.actualizarContrasena(this.user, this.password);
+
+    if (actualizado) {
+      await this.mostrarInfo('Contraseña actualizada correctamente.');
+      await this.router.navigate(['/home']);
+    } else {
+      await this.mostrarInfo('Error al actualizar la contraseña.');
     }
-  
-    const perfil = JSON.parse(perfilGuardado);
-  
-    // Validar que el usuario coincida
-    if (perfil.user !== this.user) {
-      await this.mostrarInfo('El usuario ingresado no coincide con el perfil guardado.');
-      return;
-    }
-  
-    // Actualizar la contraseña
-    perfil.password = this.password;
-  
-    // Guardar perfil actualizado
-    localStorage.setItem('perfil', JSON.stringify(perfil));
-  
-    await this.mostrarInfo('Contraseña actualizada correctamente.');
-    await this.router.navigate(['/login']);
   }
 }
-

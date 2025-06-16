@@ -26,8 +26,8 @@ export class AppComponent {
     } else {
       const currentPath = this.location.path();
 
-      // Permitir acceso a /registro sin sesión
-      if (currentPath === '/registro') {
+      // Permitir acceso a /registro y /forgot sin sesión
+      if (currentPath === '/registro' || currentPath === '/forgot') {
         // no redirigir, dejar que se cargue
         return;
       }

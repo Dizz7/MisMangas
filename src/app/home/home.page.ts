@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, AnimationController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -38,6 +39,7 @@ export class HomePage {
     private alertController: AlertController,
     private animationCtrl: AnimationController,
     private menuCtrl: MenuController,
+    private authService: AuthService
   ) {
   }
 
@@ -173,6 +175,8 @@ export class HomePage {
     localStorage.removeItem('perfil');
     this.router.navigate(['/login']);
   }
+
+  // Método para Guardar datos en base de datos y localstorage
   async guardar() {
     // Validar usuario
     if (!this.user) {
@@ -234,17 +238,27 @@ export class HomePage {
       return;
     }
   
-    // Si pasa todas las validaciones, guardar datos
-    localStorage.setItem('perfil', JSON.stringify({
-      user: this.user,
+    // Si pasa todas las validaciones:
+    const perfil = {
       password: this.password,
       nombre: this.nombre,
       apellido: this.apellido,
       email: this.email,
       nacimiento: this.nacimiento,
       educacion: this.educacion
-    }));
+    };
   
-    await this.mostrarInfo('Datos guardados correctamente.');
+    // Guardar en localStorage
+    localStorage.setItem('perfil', JSON.stringify({ user: this.user, ...perfil }));
+  
+    // Actualizar en base de datos
+    const actualizado = await this.authService.actualizarPerfil(this.user, perfil);
+  
+    if (actualizado) {
+      await this.mostrarInfo('Datos guardados correctamente.');
+    } else {
+      await this.mostrarInfo('Error al guardar datos en la base.');
+    }   
   }
+
 }

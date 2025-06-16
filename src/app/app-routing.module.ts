@@ -48,10 +48,15 @@ const routes: Routes = [
     path: 'not-found',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
+
+  {
+    path: 'forgot',
+    loadChildren: () => import('./pages/forgot/forgot.module').then( m => m.ForgotPageModule)
+  },
   {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
-  }
+  },
 
 ];
 

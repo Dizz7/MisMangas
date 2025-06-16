@@ -45,7 +45,7 @@ export class AuthService {
 
   // Método para registrar un nuevo usuario
   async registerUser(user: string, nombre: string, apellido: string, email: string, password: string, educacion: string, nacimiento: string): Promise<void> {
-    await this.initDB(); // 👈 Asegúrate de llamar esto antes de usar dbInstance
+    await this.initDB();
 
     if (!this.dbInstance) {
       throw new Error('La base de datos no fue inicializada correctamente.');
@@ -88,4 +88,63 @@ isLoggedIn(): boolean {
 logout(): void {
   localStorage.removeItem('usuario');
 }
+
+// Verificar si un usuario existe
+async verificarUsuario(nombre: string): Promise<boolean> {
+  if (!this.dbInstance) {
+    await this.initDB();
+  }
+
+  const result = await this.dbInstance!.query(
+    'SELECT * FROM usuarios WHERE user = ?',
+    [nombre]
+  );
+
+  return !!(result.values && result.values.length > 0);
+}
+
+// Actualizar la contraseña de un usuario
+async actualizarContrasena(nombre: string, nuevaPass: string): Promise<boolean> {
+  if (!this.dbInstance) {
+    await this.initDB();
+  }
+
+  try {
+    await this.dbInstance!.run(
+      'UPDATE usuarios SET password = ? WHERE user = ?',
+      [nuevaPass, nombre]
+    );
+    return true;
+  } catch (error) {
+    console.error('Error al actualizar la contraseña:', error);
+    return false;
+  }
+}
+
+async actualizarPerfil(user: string, datos: any): Promise<boolean> {
+  try {
+    if (!this.dbInstance) {
+      await this.initDB();
+    }
+    await this.dbInstance!.run(
+      `UPDATE usuarios SET 
+         password = ?, nombre = ?, apellido = ?, email = ?, nacimiento = ?, educacion = ?
+       WHERE user = ?`,
+      [
+        datos.password,
+        datos.nombre,
+        datos.apellido,
+        datos.email,
+        datos.nacimiento,
+        datos.educacion,
+        user
+      ]
+    );
+    return true;
+  } catch (error) {
+    console.error('Error al actualizar perfil:', error);
+    return false;
+  }
+}
+
 }
