@@ -20,7 +20,6 @@ import { FormsModule } from '@angular/forms';
 import { ImageModalComponent } from './components/image-modal/image-modal.component';
 
 
-
 @NgModule({
   imports: [
     BrowserModule, 
@@ -28,7 +27,6 @@ import { ImageModalComponent } from './components/image-modal/image-modal.compon
     AppRoutingModule,
     CommonModule,
     FormsModule,
-    IonicModule,
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,

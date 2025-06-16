@@ -6,67 +6,41 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="home">
-  <ion-card id="main">
 
-    <mat-card class="ion-padding" color="primary" style="padding-top: 20px;">
-      <mat-card-content>
-        <img #fotoPerfil src="/assets/images/profile.jpg" alt="Perfil Usuario" class="foto-perfil" />
-        <p #usuarioTexto class="usuario">Usuario: {{ user }}</p>
-      </mat-card-content>
-    </mat-card>
+<ion-content>
+  
+  
+    <ion-tabs>
+     <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="misdatos" class="btn-tab">
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label>Mis Datos</ion-label>
+      </ion-tab-button>
     
-    <div style="padding: 16px;">
-      <h2 class="subtitulo">Información del usuario</h2>
-
-      <div #nombreField class="nombreInput">
-        <ion-label>Nombre</ion-label>
-        <ion-input [(ngModel)]="nombre"></ion-input>
-      </div>
-      <div #apellidoField class="apellidoInput">
-        <ion-label>Apellido</ion-label>
-        <ion-input [(ngModel)]="apellido"></ion-input>
-      </div>
-
-      <div #emailField class="emailInput">
-        <ion-label>Correo</ion-label>
-        <ion-input [(ngModel)]="email"></ion-input>
-      </div>
-      
+      <ion-tab-button tab="experiencia" class="btn-tab">
+        <ion-icon name="briefcase-outline"></ion-icon>
+        <ion-label>Experiencia</ion-label>
+      </ion-tab-button>
     
-      <mat-form-field appearance="fill" style="width: 100%; margin-top: 10px;">
-        <mat-label>Nivel de Educación</mat-label>
-        <mat-select [(ngModel)]="educacion">
-          <mat-option *ngFor="let nivel of nivelesEducacion" [value]="nivel">
-            {{ nivel }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <ion-tab-button tab="certificaciones" class="btn-tab">
+        <ion-icon name="ribbon-outline"></ion-icon>
+        <ion-label>Certificaciones</ion-label>
+      </ion-tab-button>
     
-      <mat-form-field appearance="fill">
-        <mat-label>Fecha de Nacimiento</mat-label>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="nacimiento">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
+     </ion-tab-bar>
+    </ion-tabs>
     
-
-      <div class="btns">
-        <button mat-raised-button class="btn-custom" (click)="limpiar()">Limpiar</button>
-        <button mat-raised-button class="btn-custom" (click)="mostrar()">Mostrar</button>
-        <button mat-raised-button color="primary" class="btn-custom" (click)="guardar()">Guardar</button>
-      </div>
-    </div>
-  </ion-card>
+    
 
 </ion-content>
 
 
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-title class="ion-text-center" size="small">
+      <app-footer></app-footer> <!--componente footer-->
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>
 
-  <ion-footer>
-    <ion-toolbar color="light">
-      <ion-title class="ion-text-center" size="small">
-        <app-footer></app-footer> <!--componente footer-->
-      </ion-title>
-    </ion-toolbar>
-  </ion-footer>
+

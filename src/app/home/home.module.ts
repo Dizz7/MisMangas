@@ -10,7 +10,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
-
+import { MisdatosComponent } from '../components/misdatos/misdatos.component';
+import { CertificacionesComponent } from '../components/certificaciones/certificaciones.component';
+import { ExperienciaComponent } from '../components/experiencia/experiencia.component';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { SharedModule } from '../shared/shared.module'; // Importar SharedModule
@@ -30,6 +32,6 @@ import { SharedModule } from '../shared/shared.module'; // Importar SharedModule
     MatDatepickerModule,
     MatSelectModule,
     ],
-    declarations: [HomePage],
+    declarations: [HomePage, MisdatosComponent, CertificacionesComponent, ExperienciaComponent],
 })
 export class HomePageModule {}
