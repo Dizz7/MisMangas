@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap');
+
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
@@ -37,6 +39,8 @@
 @import "@ionic/angular/css/palettes/dark.system.css";
 
 
+// fuente para toda la app
+
 * {
-  font-family: 'Roboto Slab', serif; /* O 'Henny Penny', cursive */
+  font-family: 'Playwrite DE Grund', serif;
 }
