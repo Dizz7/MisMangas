@@ -11,20 +11,18 @@ import { Router } from '@angular/router';
   standalone: false,
 })
 export class CertificacionesComponent  implements OnInit {
-
   user: string = '';
-  nombre: string = '';
-  apellido: string = '';
-  educacion: string = '';
-  nacimiento: Date | null = null;
-  email: string = '';
-  password: string = '';
-
-  nivelesEducacion: string[] = ['Básica', 'Media', 'Pregrado', 'Postgrado', 'Doctorado'];
+  nombre_certificado: string = '';
+  fecha_obtencion: string = '';
+  certificado_vencimiento: boolean = false;
+  fecha_vencimiento: string = '';
 
   @ViewChild('nombreField', { static: false }) nombreField!: ElementRef;
   @ViewChild('apellidoField', { static: false }) apellidoField!: ElementRef;
   @ViewChild('emailField', { static: false }) emailField!: ElementRef;
+  @ViewChild('fotoPerfil', { static: true }) fotoPerfil!: ElementRef;
+  @ViewChild('usuarioTexto', { static: true }) usuarioTexto!: ElementRef;
+
 
   constructor(
     private router: Router,
@@ -32,103 +30,85 @@ export class CertificacionesComponent  implements OnInit {
     private animationCtrl: AnimationController,
     private menuCtrl: MenuController,
     private authService: AuthService
-  ) {}
+  ) {
+  }
 
+  ngAfterViewInit() {
+    // Animación de la foto de perfil
+    const animation = this.animationCtrl.create()
+      .addElement(this.fotoPerfil.nativeElement)
+      .duration(2500)
+      .iterations(Infinity)
+      .keyframes([
+        { offset: 0, transform: 'scale(0.9)', opacity: '1' },
+        { offset: 0.5, transform: 'scale(1.3)', opacity: '1' },
+        { offset: 1, transform: 'scale(0.9)', opacity: '1' }
+      ]);
+
+    animation.play();
+    
+
+      // Animación para el texto de usuario
+    const animTexto = this.animationCtrl.create()
+      .addElement(this.usuarioTexto.nativeElement)
+      .duration(3000)
+      .iterations(Infinity)
+      .keyframes([
+        { offset: 0, transform: 'translateX(-10px)', opacity: '1' },
+        { offset: 0.5, transform: 'translateX(10px)', opacity: '1' },
+        { offset: 1, transform: 'translateX(-10px)', opacity: '1' }
+      ]);
+    animTexto.play();
+  }
+
+  // Cerrar Menú al navegar
   ngOnInit() {
     this.menuCtrl.close("main-menu");
 
-    const perfil = localStorage.getItem('perfil');
-    if (perfil) {
-      const datos = JSON.parse(perfil);
-      this.user = datos.user || '';
-      this.password = datos.password || '';
-      this.nombre = datos.nombre || '';
-      this.apellido = datos.apellido || '';
-      this.email = datos.email || '';
-      this.nacimiento = datos.nacimiento ? new Date(datos.nacimiento) : null;
-      this.educacion = datos.educacion || '';
-    }
-  }
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras?.state;
 
-  async mostrarInfo(mensaje: string) {
-    const alert = await this.alertController.create({
-      cssClass: 'alert-custom',
-      header: 'Usuario',
-      message: mensaje,
-      buttons: ['OK']
-    });
-    await alert.present();
-  }
-
-  async guardar() {
-    if (!this.user) {
-      return this.mostrarInfo('Ingrese un usuario.');
-    }
-    if (this.user.length < 3 || this.user.length > 8) {
-      return this.mostrarInfo('El usuario debe tener entre 3 y 8 caracteres.');
-    }
-    if (!/^[a-zA-Z0-9]{3,8}$/.test(this.user)) {
-      return this.mostrarInfo('El usuario ingresado no es válido. Debe ser alfanumérico.');
-    }
-    if (!this.nombre) {
-      return this.mostrarInfo('Ingrese su nombre.');
-    }
-    if (!this.apellido) {
-      return this.mostrarInfo('Ingrese su apellido.');
-    }
-    if (!this.email) {
-      return this.mostrarInfo('Ingrese un correo electrónico.');
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)) {
-      return this.mostrarInfo('El correo electrónico ingresado no es válido.');
-    }
-    if (!this.password) {
-      return this.mostrarInfo('Ingrese la contraseña.');
-    }
-    if (this.password.length !== 4) {
-      return this.mostrarInfo('La contraseña debe tener exactamente 4 dígitos.');
-    }
-    if (!/^\d+$/.test(this.password)) {
-      return this.mostrarInfo('La contraseña sólo puede contener dígitos.');
-    }
-    if (!this.educacion) {
-      return this.mostrarInfo('Seleccione un nivel de educación.');
-    }
-    if (!this.nacimiento) {
-      return this.mostrarInfo('Ingrese su fecha de nacimiento.');
-    }
-
-    const perfil = {
-      password: this.password,
-      nombre: this.nombre,
-      apellido: this.apellido,
-      email: this.email,
-      nacimiento: this.nacimiento,
-      educacion: this.educacion
-    };
-
-    localStorage.setItem('perfil', JSON.stringify({ user: this.user, ...perfil }));
-
-    const actualizado = await this.authService.actualizarPerfil(this.user, perfil);
-
-    if (actualizado) {
-      await this.mostrarInfo('Datos guardados correctamente.');
+    if (state) {
+      this.user = state['user'] || '';
+      localStorage.setItem('usuario_data', JSON.stringify({
+        user: this.user,
+      }));
     } else {
-      await this.mostrarInfo('Error al guardar datos en la base.');
+      const guardado = localStorage.getItem('usuario_data');
+      if (guardado) {
+        const datos = JSON.parse(guardado);
+        this.user = datos.user || '';
+      }
+    }
+
+    // Intentar cargar las certificaciones desde la base de datos
+    if (this.user) {
+      this.authService.obtenerCertificacion(this.user).then(certificaciones => {
+        if (certificaciones.length > 0) {
+          const cert = certificaciones[0];
+          this.nombre_certificado = cert.nombre_certificado || '';
+          this.fecha_obtencion = cert.fecha_obtencion || '';
+          this.certificado_vencimiento = cert.certificado_vencimiento === 1 || cert.certificado_vencimiento === true;
+          this.fecha_vencimiento = cert.fecha_vencimiento || '';
+        }
+      }).catch(() => {
+        // En caso de error, no hacer nada
+      });
     }
   }
 
+  // Método LIMPIAR con animación
   limpiar() {
-    this.nombre = '';
-    this.apellido = '';
-    this.educacion = '';
-    this.nacimiento = null;
-    this.email = '';
+    this.nombre_certificado = '';
+    this.fecha_obtencion = '';
+    this.certificado_vencimiento = false;
+    this.fecha_vencimiento = '';
+  
     this.animarCampo(this.nombreField);
     this.animarCampo(this.apellidoField);
     this.animarCampo(this.emailField);
   }
-
+  
   animarCampo(elementRef: ElementRef) {
     const anim = this.animationCtrl
       .create()
@@ -142,13 +122,90 @@ export class CertificacionesComponent  implements OnInit {
         { offset: 0.75, transform: 'translateX(10px)' },
         { offset: 1, transform: 'translateX(0)' }
       ]);
+  
     anim.play();
   }
 
+  // Mostrar información con alert
+  async mostrarInfo(mensaje: string) {
+    const alert = await this.alertController.create({
+      cssClass: 'alert-custom',
+      header: 'Usuario',
+      message: mensaje,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  // Método MOSTRAR
+  async mostrar() {
+    // No longer applicable for removed fields, can be left empty or removed
+  }
   cerrarSesion() {
-    localStorage.removeItem('perfil');
+    localStorage.removeItem('usuario_data');
     this.router.navigate(['/login']);
   }
+
+  // Método para Guardar datos en base de datos y localstorage
+  async guardar() {
+    // Validar usuario
+    if (!this.user) {
+      await this.mostrarInfo('Ingrese un usuario.');
+      return;
+    }
+  
+    // Validar nombre certificado
+    if (!this.nombre_certificado) {
+      await this.mostrarInfo('Ingrese el nombre del certificado.');
+      return;
+    }
+  
+    // Validar fecha de obtención
+    if (!this.fecha_obtencion) {
+      await this.mostrarInfo('Ingrese la fecha de obtención del certificado.');
+      return;
+    }
+  
+    // Validar fecha de vencimiento si aplica
+    if (this.certificado_vencimiento && !this.fecha_vencimiento) {
+      await this.mostrarInfo('Ingrese la fecha de vencimiento del certificado.');
+      return;
+    }
+  
+    // Si pasa todas las validaciones:
+    const certificacion = {
+      nombre_certificado: this.nombre_certificado,
+      fecha_obtencion: this.fecha_obtencion,
+      certificado_vencimiento: this.certificado_vencimiento,
+      fecha_vencimiento: this.fecha_vencimiento
+    };
+  
+    // Guardar en localStorage bajo 'usuario_data' manteniendo el objeto completo
+    let usuarioDataRaw = localStorage.getItem('usuario_data');
+    let usuarioData: any;
+    try {
+      usuarioData = usuarioDataRaw ? JSON.parse(usuarioDataRaw) : {};
+    } catch (e) {
+      usuarioData = {};
+    }
+    // Asegurarse de mantener el campo user
+    if (!usuarioData.user) {
+      usuarioData.user = this.user;
+    }
+    usuarioData.nombre_certificado = this.nombre_certificado;
+    usuarioData.fecha_obtencion = this.fecha_obtencion;
+    usuarioData.certificado_vencimiento = this.certificado_vencimiento;
+    usuarioData.fecha_vencimiento = this.fecha_vencimiento;
+    localStorage.setItem('usuario_data', JSON.stringify(usuarioData));
+  
+    // Guardar en base de datos
+    const agregado = await this.authService.agregarCertificacion(this.user, certificacion);
+  
+    if (agregado) {
+      await this.mostrarInfo('Certificación guardada correctamente.');
+    } else {
+      await this.mostrarInfo('Error al guardar la certificación en la base.');
+    }   
+  }
+
 }
-
-

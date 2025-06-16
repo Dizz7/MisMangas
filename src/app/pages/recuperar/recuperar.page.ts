@@ -63,7 +63,7 @@ export class RecuperarPage {
         educacion: this.educacion
       }));
     } else {
-      const guardado = localStorage.getItem('perfil');
+      const guardado = localStorage.getItem('usuario_data');
       if (guardado) {
         const datos = JSON.parse(guardado);
         this.user = datos.user || '';

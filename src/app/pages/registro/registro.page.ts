@@ -168,7 +168,7 @@ validarCorreo(email: string): boolean {
         this.nacimiento.toISOString().split('T')[0] // Convertir a formato YYYY-MM-DD
       );
   
-      localStorage.setItem('perfil', JSON.stringify({
+      localStorage.setItem('usuario_data', JSON.stringify({
         user: this.user,
         password: this.password,
         nombre: this.nombre,

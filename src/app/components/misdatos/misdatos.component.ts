@@ -72,13 +72,14 @@ export class MisdatosComponent implements OnInit {
     animTexto.play();
   }
 
-  // Cerrar Menú al navegar
+  // Cerrar Menú al navegar y obtener datos del estado de navegación
   ngOnInit() {
     this.menuCtrl.close("main-menu");
-
+  
+    // Intentamos obtener los datos desde el estado de navegación
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras?.state;
-
+  
     if (state) {
       this.user = state['user'] || '';
       this.password = state['password'] || '';
@@ -87,8 +88,8 @@ export class MisdatosComponent implements OnInit {
       this.email = state['email'] || '';
       this.nacimiento = state['nacimiento'] ? new Date(state['nacimiento']) : null;
       this.educacion = state['educacion'] || '';
-
-      localStorage.setItem('perfil', JSON.stringify({
+  
+      localStorage.setItem('usuario_data', JSON.stringify({
         user: this.user,
         password: this.password,
         nombre: this.nombre,
@@ -98,16 +99,17 @@ export class MisdatosComponent implements OnInit {
         educacion: this.educacion
       }));
     } else {
-      const guardado = localStorage.getItem('perfil');
+      const guardado = localStorage.getItem('usuario_data');
       if (guardado) {
         const datos = JSON.parse(guardado);
-        this.user = datos.user || '';
-        this.password = datos.password || '';
-        this.nombre = datos.nombre || '';
-        this.apellido = datos.apellido || '';
-        this.email = datos.email || '';
-        this.nacimiento = datos.nacimiento ? new Date(datos.nacimiento) : null;
-        this.educacion = datos.educacion || '';
+  
+        if (datos.user != null) this.user = datos.user;
+        if (datos.password != null) this.password = datos.password;
+        if (datos.nombre != null) this.nombre = datos.nombre;
+        if (datos.apellido != null) this.apellido = datos.apellido;
+        if (datos.email != null) this.email = datos.email;
+        if (datos.nacimiento != null) this.nacimiento = new Date(datos.nacimiento);
+        if (datos.educacion != null) this.educacion = datos.educacion;
       }
     }
   }
@@ -173,7 +175,7 @@ export class MisdatosComponent implements OnInit {
     await this.mostrarInfo(`Su nombre es ${this.nombre} ${this.apellido}.`);
   }
   cerrarSesion() {
-    localStorage.removeItem('perfil');
+    localStorage.removeItem('usuario_data');
     this.router.navigate(['/login']);
   }
 
@@ -250,7 +252,7 @@ export class MisdatosComponent implements OnInit {
     };
   
     // Guardar en localStorage
-    localStorage.setItem('perfil', JSON.stringify({ user: this.user, ...perfil }));
+    localStorage.setItem('usuario_data', JSON.stringify({ user: this.user, ...perfil }));
   
     // Actualizar en base de datos
     const actualizado = await this.authService.actualizarPerfil(this.user, perfil);

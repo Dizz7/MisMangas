@@ -1,37 +1,42 @@
-<ion-content class="fondo">
-  <ion-card class="card-formulario">
-    <div class="perfil-container">
-      <img #fotoPerfil class="foto-perfil" src="assets/icon/perfil.png" alt="Foto de perfil" />
+<ion-content class="home">
+  <ion-card id="main">
+
+    <mat-card class="ion-padding" color="primary" style="padding-top: 20px;">
+      <mat-card-content>
+        <img #fotoPerfil src="/assets/images/profile.jpg" alt="Perfil Usuario" class="foto-perfil" />
+        <p #usuarioTexto class="usuario">Usuario: {{ user }}</p>
+      </mat-card-content>
+    </mat-card>
+    <ion-item>
+    <div style="padding: 16px;">
+      <h2 class="subtitulo">Certificaciones</h2>
+
+      <ion-item>
+        <ion-label position="stacked">Nombre Certificado</ion-label>
+        <ion-input [(ngModel)]="nombre_certificado" class="custom-input"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Fecha de Obtención</ion-label>
+        <ion-datetime display-format="YYYY-MM-DD" [(ngModel)]="fecha_obtencion"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>¿Tiene vencimiento?</ion-label>
+        <ion-toggle [(ngModel)]="certificado_vencimiento"></ion-toggle>
+      </ion-item>
+
+      <ion-item *ngIf="certificado_vencimiento">
+        <ion-label position="stacked">Fecha de Vencimiento</ion-label>
+        <ion-datetime display-format="YYYY-MM-DD" [(ngModel)]="fecha_vencimiento"></ion-datetime>
+      </ion-item>
+
+      <div class="btns ion-padding-top">
+        <button mat-raised-button class="btn-custom" (click)="limpiar()">Limpiar</button>
+        <button mat-raised-button color="primary" class="btn-custom" (click)="guardar()">Guardar</button>
+      </div>
     </div>
-
-    <form>
-      <ion-item>
-        <ion-label position="floating">Nombre</ion-label>
-
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Apellido</ion-label>
-
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Correo electrónico</ion-label>
-
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Fecha de nacimiento</ion-label>
-        
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Educación</ion-label>
-
-      </ion-item>
-
-      <ion-button expand="block" color="success" (click)="guardar()">Guardar</ion-button>
-      
-    </form>
+    </ion-item>
   </ion-card>
+
 </ion-content>
