@@ -41,6 +41,14 @@ export class AuthService {
       nacimiento TEXT
     )`,
     );
+
+    await this.dbInstance.execute(
+      `CREATE TABLE IF NOT EXISTS sesion_data (
+        user_name TEXT(8) PRIMARY KEY NOT NULL,
+        password INTEGER NOT NULL,
+        active INTEGER NOT NULL
+      )`
+    );
   }
 
   // Método para registrar un nuevo usuario
@@ -74,6 +82,11 @@ async loginUsuario(user: string, password: string): Promise<boolean> {
   if (loginExitoso) {
     // Guarda al usuario como sesión activa
     localStorage.setItem('usuario', user);
+    await this.dbInstance!.run(
+      `INSERT OR REPLACE INTO sesion_data (user_name, password, active)
+       VALUES (?, ?, 1)`,
+      [user, parseInt(password)]
+    );
   }
 
   return loginExitoso;
@@ -82,12 +95,31 @@ async loginUsuario(user: string, password: string): Promise<boolean> {
 // Método para revisar sesión activa
 isLoggedIn(): boolean {
   return !!localStorage.getItem('usuario');
+
+  
+}
+
+// Método para obtener el usuario activo
+async getSesionActiva(): Promise<string | null> {
+  const result = await this.dbInstance!.query(
+    `SELECT user_name FROM sesion_data WHERE active = 1`
+  );
+  return result.values?.[0]?.user_name ?? null;
 }
 
 // Método para cerrar sesión
 logout(): void {
-  localStorage.removeItem('usuario');
+  const user = localStorage.getItem('usuario');
+  if (user && this.dbInstance) {
+    this.dbInstance.run(
+      `UPDATE sesion_data SET active = 0 WHERE user_name = ?`,
+      [user]
+    ).catch(error => console.error('Error al cerrar sesión:', error));
+  }
+
+  localStorage.removeItem('usuario'); 
 }
+
 
 // Verificar si un usuario existe
 async verificarUsuario(nombre: string): Promise<boolean> {
