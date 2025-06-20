@@ -1,40 +1,48 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>prueba-mangas</ion-title>
+<ion-header>
+  <ion-toolbar class="custom-header-toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button></ion-buttons>
+      <app-logo></app-logo> <!--componente logo-->
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
- <ion-list>
-  <ion-item>
-    <ion-label>
-      <h2>Prueba de API</h2>
-      <p>Esta página es una prueba para verificar el funcionamiento de la API.</p>
-    </ion-label>
-  </ion-item>
 
- </ion-list>
+<ion-content class="home" fullscreen>
+  <ion-card id="main">
 
- <ion-list>
-  <ion-item>
-    <ion-label>
-      <h2>Mangas populares</h2>
-    </ion-label>
-  </ion-item>
-</ion-list>
+    
+    <div style="padding: 16px;">
+      <h2 class="subtitulo">Mangas populares</h2>
 
-<ion-card *ngFor="let manga of mangas">
-  <img [src]="manga.image" alt="{{ manga.title }}" />
-  <ion-card-header>
-    <ion-card-title>{{ manga.title }}</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <p><strong>Autor:</strong> {{ manga.authors.join(', ') }}</p>
-    <p>{{ manga.synopsis }}</p>
-  </ion-card-content>
-</ion-card>
+      
+      <ion-card *ngFor="let manga of mangas">
+        <img [src]="manga.image" alt="{{ manga.title }}" class="manga-cover"
+             (click)="abrirImagen(manga.image)" />
+        <ion-card-header>
+          <ion-card-title>{{ manga.title }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p><strong>Autor:</strong> {{ manga.authors.join(', ') }}</p>
+          <p>{{ manga.synopsis }}</p>
+        </ion-card-content>
+      </ion-card>
+    
 
 
+    </div>
+  </ion-card>
 
 
 </ion-content>
+
+ 
+
+
+
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-title class="ion-text-center" size="small">
+      <app-footer></app-footer> <!--componente footer-->
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

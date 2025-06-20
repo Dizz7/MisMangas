@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar class="custom-header-toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button></ion-buttons>
+      <app-logo></app-logo> <!--componente logo-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="home" fullscreen>
+  <ion-card id="main">
+
+    <mat-card class="ion-padding" color="primary" style="padding-top: 20px;">
+
+      <mat-card-content>
+        <img src="/assets/images/icon2.jpg" alt="Perfil Usuario" class="foto-about" />
+      </mat-card-content>
+    </mat-card>
+    
+    <div style="padding: 16px;">
+      <h2 class="subtitulo">Esta es tu ubicación:</h2>
+
+      <div id="map" style="width: 100%; height: 300px;"></div>
+      <ion-item *ngIf="lat && lng">
+        <p>Ubicación actual: Latitud {{ lat }}, Longitud {{ lng }}</p>
+      </ion-item>
+
+      <ion-item>
+
+        <p style="text-align: justify;">
+
+        Si tienes alguna pregunta, comentario o sugerencia, no dudes en ponerte en contacto
+        con nosotros a través de <a href="https://github.com/Dizz7" class="vinculo" target="_blank">Github</a>.
+      </p>
+    </ion-item>
+    
+
+
+    </div>
+  </ion-card>
+
+</ion-content>
+
+
+
+
+
+
+
+
+    
+
+
+
+  <ion-footer>
+    <ion-toolbar color="light">
+      <ion-title class="ion-text-center" size="small">
+        <app-footer></app-footer> <!--componente footer-->
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>

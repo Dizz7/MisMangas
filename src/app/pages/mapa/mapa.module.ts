@@ -8,25 +8,22 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOption } from '@angular/material/core';
 
-import { PruebaMangasPageRoutingModule } from './prueba-mangas-routing.module';
-
-import { PruebaMangasPage } from './prueba-mangas.page';
-import { SharedModule } from 'src/app/shared/shared.module';
-import { MatCard } from '@angular/material/card';
+import { MapaPageRoutingModule } from './mapa-routing.module';
+import { SharedModule } from '../../shared/shared.module';
+import { MapaPage } from './mapa.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    MatCard,
-    IonicModule,
     SharedModule,
-    PruebaMangasPageRoutingModule,
+    IonicModule,
+    MapaPageRoutingModule,
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
     MatOption,
   ],
-  declarations: [PruebaMangasPage]
+  declarations: [MapaPage]
 })
-export class PruebaMangasPageModule {}
+export class MapaPageModule {}

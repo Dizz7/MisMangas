@@ -70,12 +70,19 @@ const routes: Routes = [
   },
   {
     path: 'prueba-mangas',
-    loadChildren: () => import('./pages/prueba-mangas/prueba-mangas.module').then( m => m.PruebaMangasPageModule)
+    loadChildren: () => import('./pages/prueba-mangas/prueba-mangas.module').then( m => m.PruebaMangasPageModule),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'mapa',
+    loadChildren: () => import('./pages/mapa/mapa.module').then( m => m.MapaPageModule),
+    canActivate: [authGuard]
   },
   {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
   },
+
 
 
 ];
