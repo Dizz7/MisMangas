@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
+
 
 const routes: Routes = [
   {
@@ -14,35 +16,43 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    canActivate: [authGuard]
   },
   {
     path: 'registro',
-    loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
+    loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule),
+    
   },
   {
     path: 'about',
-    loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule)
+    loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule),
+    canActivate: [authGuard]
   },
   {
     path: 'recuperar',
-    loadChildren: () => import('./pages/recuperar/recuperar.module').then( m => m.RecuperarPageModule)
+    loadChildren: () => import('./pages/recuperar/recuperar.module').then( m => m.RecuperarPageModule),
+    canActivate: [authGuard]
   },
   {
     path: 'tabs',
-    loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule)
+    loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule),
+    canActivate: [authGuard]
   },
   {
     path: 'leyendo',
-    loadChildren: () => import('./pages/tabs/leyendo/leyendo.module').then( m => m.LeyendoPageModule)
+    loadChildren: () => import('./pages/tabs/leyendo/leyendo.module').then( m => m.LeyendoPageModule),
+    canActivate: [authGuard]
   },
   {
     path: 'por-leer',
-    loadChildren: () => import('./pages/tabs/por-leer/por-leer.module').then( m => m.PorLeerPageModule)
+    loadChildren: () => import('./pages/tabs/por-leer/por-leer.module').then( m => m.PorLeerPageModule),
+    canActivate: [authGuard]
   },
   {
     path: 'leidos',
-    loadChildren: () => import('./pages/tabs/leidos/leidos.module').then( m => m.LeidosPageModule)
+    loadChildren: () => import('./pages/tabs/leidos/leidos.module').then( m => m.LeidosPageModule),
+    canActivate: [authGuard]
   },
   {
     path: 'not-found',

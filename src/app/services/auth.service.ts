@@ -132,6 +132,7 @@ async loginUsuario(user: string, password: string): Promise<boolean> {
     // Guardar en localStorage
     localStorage.setItem('usuario', user);
     localStorage.setItem('usuario_data', JSON.stringify(usuarioData));
+    localStorage.setItem('session', 'active');
 
     await this.dbInstance!.run(
       `INSERT OR REPLACE INTO sesion_data (user_name, password, active)
@@ -168,7 +169,8 @@ logout(): void {
     ).catch(error => console.error('Error al cerrar sesión:', error));
   }
 
-  localStorage.removeItem('usuario'); 
+  localStorage.removeItem('usuario');
+  localStorage.removeItem('session'); 
 }
 
 
