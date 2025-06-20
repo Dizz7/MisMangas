@@ -72,3 +72,4 @@ Thumbs.db
 
 # node_modules
 /node_modules
+android/app/src/main/res/xml/config 2.xml
