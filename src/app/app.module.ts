@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { Location } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -23,6 +24,7 @@ import { ImageModalComponent } from './components/image-modal/image-modal.compon
 @NgModule({
   imports: [
     BrowserModule, 
+    HttpClientModule,
     IonicModule.forRoot(), 
     AppRoutingModule,
     CommonModule,

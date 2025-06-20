@@ -63,6 +63,11 @@ const routes: Routes = [
     path: 'forgot',
     loadChildren: () => import('./pages/forgot/forgot.module').then( m => m.ForgotPageModule)
   },
+
+  {
+    path: 'prueba-api',
+    loadChildren: () => import('./pages/prueba-api/prueba-api.module').then( m => m.PruebaApiPageModule)
+  },
   {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
