@@ -79,9 +79,14 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'camara',
+    loadChildren: () => import('./pages/camara/camara.module').then( m => m.CamaraPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
   },
+
 
 
 
