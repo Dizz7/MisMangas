@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiExternaService } from 'src/app/services/api-externa.service';
 
+
 @Component({
   selector: 'app-prueba-api',
   templateUrl: './prueba-api.page.html',
@@ -13,6 +14,8 @@ export class PruebaApiPage implements OnInit {
   nuevoUsuario: any = { name: '', email: '' }; // Objeto para el nuevo usuario
   editando: boolean = false;
   usuarioEditandoId: number | null = null;
+  mangas: any[] = [];
+
   constructor(
     private apiExternaService: ApiExternaService,
   ) { }
@@ -87,4 +90,3 @@ export class PruebaApiPage implements OnInit {
   }
 
 }
-

@@ -69,9 +69,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/prueba-api/prueba-api.module').then( m => m.PruebaApiPageModule)
   },
   {
+    path: 'prueba-mangas',
+    loadChildren: () => import('./pages/prueba-mangas/prueba-mangas.module').then( m => m.PruebaMangasPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
   },
+
 
 ];
 

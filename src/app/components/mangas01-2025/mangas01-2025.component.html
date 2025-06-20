@@ -1,0 +1,7 @@
+<!-- mangas01-2025.component.html -->
+<div *ngFor="let manga of mangas" class="manga-card">
+  <img [src]="manga.image" [alt]="manga.title" width="100">
+  <h3>{{ manga.title }}</h3>
+  <p><strong>Autores:</strong> {{ manga.authors.join(', ') }}</p>
+  <p>{{ manga.synopsis }}</p>
+</div>

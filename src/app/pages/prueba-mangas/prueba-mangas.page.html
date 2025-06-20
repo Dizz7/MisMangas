@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>prueba-mangas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+ <ion-list>
+  <ion-item>
+    <ion-label>
+      <h2>Prueba de API</h2>
+      <p>Esta página es una prueba para verificar el funcionamiento de la API.</p>
+    </ion-label>
+  </ion-item>
+
+ </ion-list>
+
+ <ion-list>
+  <ion-item>
+    <ion-label>
+      <h2>Mangas populares</h2>
+    </ion-label>
+  </ion-item>
+</ion-list>
+
+<ion-card *ngFor="let manga of mangas">
+  <img [src]="manga.image" alt="{{ manga.title }}" />
+  <ion-card-header>
+    <ion-card-title>{{ manga.title }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <p><strong>Autores:</strong> {{ manga.authors.join(', ') }}</p>
+    <p>{{ manga.synopsis }}</p>
+  </ion-card-content>
+</ion-card>
+
+
+
+
+</ion-content>
