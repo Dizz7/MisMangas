@@ -60,7 +60,14 @@ export class CamaraPage implements OnInit {
       return;
     }
   
-    // Guardar la imagen en localStorage
+    const usuarioDataStr = localStorage.getItem('usuario_data');
+    let usuarioData = null;
+    if (usuarioDataStr) {
+      usuarioData = JSON.parse(usuarioDataStr);
+      usuarioData.fotoPerfil = this.photo;
+      localStorage.setItem('usuario_data', JSON.stringify(usuarioData));
+    }
+  
     localStorage.setItem('imagenPerfil', this.photo);
   
     // Obtener el usuario actual desde localStorage
@@ -75,8 +82,10 @@ export class CamaraPage implements OnInit {
   
     if (exito) {
       console.log('Foto guardada correctamente en la base de datos');
-      this.router.navigateByUrl('/misdatos').then(() => {
-        window.location.reload(); // para que la vista de perfil se actualice con la nueva foto
+      this.router.navigateByUrl('/home', {
+        state: { usuario_data: usuarioData }
+      }).then(() => {
+        window.location.reload();
       });
     } else {
       console.error('Error al guardar la foto en la base de datos');
@@ -93,6 +102,14 @@ export class CamaraPage implements OnInit {
   // Método para establecer una imagen por defecto
   async fotoDefecto() {
     this.photo = '/assets/images/profile.jpg'; // Ruta de la imagen por defecto
+
+    const usuarioDataStr = localStorage.getItem('usuario_data');
+    let usuarioData = null;
+    if (usuarioDataStr) {
+      usuarioData = JSON.parse(usuarioDataStr);
+      usuarioData.fotoPerfil = this.photo;
+      localStorage.setItem('usuario_data', JSON.stringify(usuarioData));
+    }
     localStorage.setItem('imagenPerfil', this.photo);
 
     const user = localStorage.getItem('usuario');
@@ -102,6 +119,13 @@ export class CamaraPage implements OnInit {
     }
 
     const exito = await this.authService.actualizarFotoPerfil(user, this.photo);
+    
+    this.router.navigateByUrl('/home', {
+      state: { usuario_data: usuarioData }
+    }).then(() => {
+      window.location.reload();
+    });
+
 
     if (!exito) {
       console.error('Error al guardar la imagen por defecto en la base de datos');

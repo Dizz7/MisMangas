@@ -77,33 +77,45 @@ export class MisdatosPage implements OnInit {
   async ngOnInit() {
     this.menuCtrl.close("main-menu");
   
-    // Intentamos obtener los datos desde el estado de navegación
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras?.state;
-    // Obtener imagen de perfil desde localStorage
+  
     this.imagenPerfil = localStorage.getItem('imagenPerfil');
   
     if (state) {
-      this.user = state['user'] || '';
-      this.password = state['password'] || '';
-      this.nombre = state['nombre'] || '';
-      this.apellido = state['apellido'] || '';
-      this.email = state['email'] || '';
-      this.nacimiento = state['nacimiento'] ? new Date(state['nacimiento']) : null;
-      this.educacion = state['educacion'] || '';
- 
+      if (state['usuario_data']) {
+        const datos = state['usuario_data'];
+        this.user = datos.user || '';
+        this.password = datos.password || '';
+        this.nombre = datos.nombre || '';
+        this.apellido = datos.apellido || '';
+        this.email = datos.email || '';
+        this.nacimiento = datos.nacimiento ? new Date(datos.nacimiento) : null;
+        this.educacion = datos.educacion || '';
   
-      localStorage.setItem('usuario_data', JSON.stringify({
-        user: this.user,
-        password: this.password,
-        nombre: this.nombre,
-        apellido: this.apellido,
-        email: this.email,
-        nacimiento: this.nacimiento,
-        educacion: this.educacion
-       
-        
-      }));
+        // Actualiza localStorage con el objeto completo
+        localStorage.setItem('usuario_data', JSON.stringify(datos));
+  
+      } else {
+        // Si no viene usuario_data, entonces leer propiedades sueltas
+        this.user = state['user'] || '';
+        this.password = state['password'] || '';
+        this.nombre = state['nombre'] || '';
+        this.apellido = state['apellido'] || '';
+        this.email = state['email'] || '';
+        this.nacimiento = state['nacimiento'] ? new Date(state['nacimiento']) : null;
+        this.educacion = state['educacion'] || '';
+  
+        localStorage.setItem('usuario_data', JSON.stringify({
+          user: this.user,
+          password: this.password,
+          nombre: this.nombre,
+          apellido: this.apellido,
+          email: this.email,
+          nacimiento: this.nacimiento,
+          educacion: this.educacion
+        }));
+      }
     } else {
       const guardado = localStorage.getItem('usuario_data');
       if (guardado) {
@@ -196,6 +208,9 @@ export class MisdatosPage implements OnInit {
   }
   cerrarSesion() {
     localStorage.removeItem('usuario_data');
+    localStorage.removeItem('imagenPerfil');
+    localStorage.removeItem('session');
+    localStorage.removeItem('usuario');
     this.router.navigate(['/login']);
   }
 
@@ -292,4 +307,20 @@ export class MisdatosPage implements OnInit {
   }
 
 
+// Carga de datos cada vez que entre a la tab
+  ionViewWillEnter() {
+    const guardado = localStorage.getItem('usuario_data');
+    if (guardado) {
+      const datos = JSON.parse(guardado);
+
+      if (datos.user != null) this.user = datos.user;
+      if (datos.password != null) this.password = datos.password;
+      if (datos.nombre != null) this.nombre = datos.nombre;
+      if (datos.apellido != null) this.apellido = datos.apellido;
+      if (datos.email != null) this.email = datos.email;
+      if (datos.nacimiento != null) this.nacimiento = new Date(datos.nacimiento);
+      if (datos.educacion != null) this.educacion = datos.educacion;
+      if (datos.fotoPerfil != null) this.imagenPerfil = datos.fotoPerfil;
+    }
+  }
 }

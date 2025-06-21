@@ -106,10 +106,11 @@ validarUsuario(user: string): boolean {
 
     // Obtener datos del perfil para continuar (si existen)
     const guardado = localStorage.getItem('usuario_data');
-    let datos = null;
-    if (guardado) {
-      datos = JSON.parse(guardado);
+    if (!guardado) {
+      this.mostrarError('No se pudieron recuperar los datos del usuario.');
+      return;
     }
+    const datos = JSON.parse(guardado);
 
     // Si todo es correcto
     await this.mostrarToasts();
