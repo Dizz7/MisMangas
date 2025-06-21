@@ -26,14 +26,20 @@ const routes: Routes = [
         //path: 'certificaciones',
         //loadChildren: () => import('./tabs/certificaciones/certificaciones.module').then(m => m.CertificacionesPageModule)
       //},
-      {
-        path: 'hola',
-        loadChildren: () => import('./tabs/hola/hola.module').then(m => m.HolaPageModule)
-      },
 
+      {
+        path: 'exp',
+        loadChildren: () => import('./tabs/exp/exp.module').then( m => m.ExpPageModule)
+      },
+      {
+        path: 'cert',
+        loadChildren: () => import('./tabs/cert/cert.module').then( m => m.CertPageModule)
+      },
 
     ]
   },
+
+
 
 ];
 
