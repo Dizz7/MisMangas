@@ -47,9 +47,9 @@ ion-card {
     margin: 10px;
     border-radius: 6px; /* (opcional) Bordes ligeramente redondeados */
   }
-
-
-
+  
+  
+  
   .animacion-limpiar {
     animation: slide-left-right 1s ease-in-out; // Animación de deslizamiento horizontal suave
   }
@@ -105,7 +105,7 @@ ion-card {
   }
   
   
-  .nombreInput, .apellidoInput, .emailInput {
+  .nombreInput, .apellidoInput, .emailInput, .custom-input {
     margin-top: 16px; // Espacio superior para separación
     margin-bottom: 10px; // Espacio inferior para separación
     padding: 3px; // Espacio interno pequeño
@@ -119,7 +119,7 @@ ion-card {
     transition: border-color 0.3s, box-shadow 0.3s; // Transiciones suaves para interacción
   }
   
-  .nombreInput:hover, .apellidoInput:hover {
+  .nombreInput:hover, .apellidoInput:hover, .custom-input:hover {
     
     background-color: #c5c8d4; // Cambio de fondo al pasar el mouse
     box-shadow: 0 0 5px rgba(70, 100, 165, 0.979); /* sombra sutil para resaltar */

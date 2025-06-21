@@ -6,16 +6,18 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-certificaciones',
-  templateUrl: './certificaciones.component.html',
-  styleUrls: ['./certificaciones.component.scss'],
+  templateUrl: './certificaciones.page.html',
+  styleUrls: ['./certificaciones.page.scss'],
   standalone: false,
 })
-export class CertificacionesComponent  implements OnInit {
+export class CertificacionesPage implements OnInit {
+
   user: string = '';
   nombre_certificado: string = '';
   fecha_obtencion: string = '';
   certificado_vencimiento: boolean = false;
   fecha_vencimiento: string = '';
+
 
   @ViewChild('nombreField', { static: false }) nombreField!: ElementRef;
   @ViewChild('apellidoField', { static: false }) apellidoField!: ElementRef;
@@ -81,6 +83,7 @@ export class CertificacionesComponent  implements OnInit {
       }
     }
 
+
     // Intentar cargar las certificaciones desde la base de datos
     if (this.user) {
       this.authService.obtenerCertificacion(this.user).then(certificaciones => {
@@ -90,6 +93,7 @@ export class CertificacionesComponent  implements OnInit {
           this.fecha_obtencion = cert.fecha_obtencion || '';
           this.certificado_vencimiento = cert.certificado_vencimiento === 1 || cert.certificado_vencimiento === true;
           this.fecha_vencimiento = cert.fecha_vencimiento || '';
+          
         }
       }).catch(() => {
         // En caso de error, no hacer nada
@@ -197,7 +201,8 @@ export class CertificacionesComponent  implements OnInit {
     usuarioData.certificado_vencimiento = this.certificado_vencimiento;
     usuarioData.fecha_vencimiento = this.fecha_vencimiento;
     localStorage.setItem('usuario_data', JSON.stringify(usuarioData));
-  
+    
+ 
     // Guardar en base de datos
     const agregado = await this.authService.agregarCertificacion(this.user, certificacion);
   

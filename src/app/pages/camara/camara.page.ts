@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { Filesystem, Directory } from '@capacitor/filesystem';
 
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
@@ -19,6 +20,7 @@ export class CamaraPage implements OnInit {
     private menuCtrl: MenuController) { }
 
   ngOnInit() {
+    this.menuCtrl.close("main-menu");
   }
 
   async takePicture() {
@@ -32,9 +34,42 @@ export class CamaraPage implements OnInit {
 
       this.photo = 'data:image/jpeg;base64,' + image.base64String;
 
+
+  // Guardar la foto en el sistema de archivos
+  const fileName = new Date().getTime() + '.jpeg'; // Nombre único basado en timestamp
+
+  const savedFile = await Filesystem.writeFile({
+    path: fileName,
+    data: image.base64String!,
+    directory: Directory.Data // Usar Directory.Data para almacenamiento privado
+  });
+
+  console.log('Foto guardada en:', savedFile.uri);
+
+
     } catch (error) {
       console.error('Error al tomar foto', error);
     }
   }
+
+  guardarImagen() {
+
+    // Guardar la imagen como base64 en localStorage
+    localStorage.setItem('imagenPerfil', this.photo!);
+  }
+
+  // Volver al Home sin cambios
+  volver() {
+    this.router.navigateByUrl('/home').then(() => {
+      window.location.reload();
+    });
+  }
+
+  // Método para establecer una imagen por defecto
+  fotoDefecto() {
+    this.photo = '/assets/images/profile.jpg'; // Ruta de la imagen por defecto
+    localStorage.setItem('imagenPerfil', this.photo);
+  }
+
 
 }

@@ -113,7 +113,7 @@ validarUsuario(user: string): boolean {
 
     // Si todo es correcto
     await this.mostrarToasts();
-    this.router.navigate(['/home'], {
+    this.router.navigateByUrl('/home', {
       state: {
         user: this.user,
         password: this.password,
@@ -123,6 +123,6 @@ validarUsuario(user: string): boolean {
         nacimiento: datos?.nacimiento,
         educacion: datos?.educacion
       }
-    });
-  }
+    }).then(() => window.location.reload());
+}
 }

@@ -1,13 +1,32 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Cámara</ion-title>
+<ion-header>
+  <ion-toolbar class="custom-header-toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button></ion-buttons>
+      <app-logo></app-logo> <!--componente logo-->
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <ion-button expand="block" (click)="takePicture()">Tomar Foto</ion-button>
 
-  <div *ngIf="photo" style="margin-top: 20px; text-align: center;">
-    <img [src]="photo" alt="Foto tomada" style="max-width: 100%; border-radius: 10px;" />
-  </div>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-card>
+  <ion-title class="subtitulo">Actualizar Foto de Perfil</ion-title>
+    <ion-button class="btn-custom" fill="solid" expand="block" (click)="takePicture()">Tomar Foto</ion-button>
+
+    <div *ngIf="photo" style="margin-top: 20px; text-align: center;">
+      <img [src]="photo" alt="Foto tomada" style="max-width: 100%; border-radius: 10px;" />
+    </div>
+      <ion-button class="btn-custom" fill="solid" expand="block" (click)="guardarImagen()" *ngIf="photo">Actualizar Foto Perfil</ion-button>
+      <ion-button class="btn-custom" fill="solid" expand="block" (click)="fotoDefecto()">Foto por Defecto</ion-button>
+      <ion-button class="btn-custom" fill="solid" expand="block" (click)="volver()">Volver</ion-button>
+  </ion-card>
 </ion-content>
+
+
+
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-title class="ion-text-center" size="small">
+      <app-footer></app-footer> <!--componente footer-->
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

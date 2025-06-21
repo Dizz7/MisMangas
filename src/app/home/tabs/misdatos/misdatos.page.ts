@@ -4,14 +4,14 @@ import { AlertController, AnimationController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
-
 @Component({
   selector: 'app-misdatos',
-  templateUrl: './misdatos.component.html',
-  styleUrls: ['./misdatos.component.scss'],
+  templateUrl: './misdatos.page.html',
+  styleUrls: ['./misdatos.page.scss'],
   standalone: false,
 })
-export class MisdatosComponent implements OnInit {
+export class MisdatosPage implements OnInit {
+
   user: string = '';
   nombre: string = '';
   apellido: string = '';
@@ -19,6 +19,7 @@ export class MisdatosComponent implements OnInit {
   nacimiento: Date | null = null;
   email: string = '';
   password: string = '';
+  imagenPerfil: string | null = null;
 
   nivelesEducacion: string[] = [
     'Básica',
@@ -79,6 +80,8 @@ export class MisdatosComponent implements OnInit {
     // Intentamos obtener los datos desde el estado de navegación
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras?.state;
+    // Obtener imagen de perfil desde localStorage
+    this.imagenPerfil = localStorage.getItem('imagenPerfil');
   
     if (state) {
       this.user = state['user'] || '';
@@ -88,6 +91,7 @@ export class MisdatosComponent implements OnInit {
       this.email = state['email'] || '';
       this.nacimiento = state['nacimiento'] ? new Date(state['nacimiento']) : null;
       this.educacion = state['educacion'] || '';
+ 
   
       localStorage.setItem('usuario_data', JSON.stringify({
         user: this.user,
@@ -97,6 +101,8 @@ export class MisdatosComponent implements OnInit {
         email: this.email,
         nacimiento: this.nacimiento,
         educacion: this.educacion
+       
+        
       }));
     } else {
       const guardado = localStorage.getItem('usuario_data');
@@ -112,6 +118,7 @@ export class MisdatosComponent implements OnInit {
         if (datos.educacion != null) this.educacion = datos.educacion;
       }
     }
+    
   }
 
   // Método LIMPIAR con animación
@@ -263,5 +270,13 @@ export class MisdatosComponent implements OnInit {
       await this.mostrarInfo('Error al guardar datos en la base.');
     }   
   }
+
+  // Método para cambiar foto de perfil
+  cambiarFoto() {
+    this.router.navigate(['/camara'], {
+      state: { user: this.user }
+    });
+  }
+
 
 }

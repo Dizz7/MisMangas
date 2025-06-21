@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePage } from './home.page';
-import { MisdatosComponent } from '../components/misdatos/misdatos.component';
-import { ExperienciaComponent } from '../components/experiencia/experiencia.component';
-import { CertificacionesComponent } from '../components/certificaciones/certificaciones.component';
+
 
 
 const routes: Routes = [
@@ -12,24 +10,31 @@ const routes: Routes = [
     component: HomePage,
     children: [
       {
-        path: 'misdatos',
-        component: MisdatosComponent
-      },
-      {
-        path: 'experiencia',
-        component: ExperienciaComponent
-      },
-      {
-        path: 'certificaciones',
-        component: CertificacionesComponent
-      },
-      {
         path: '',
         redirectTo: 'misdatos',
         pathMatch: 'full'
-      }
+      },
+      {
+        path: 'misdatos',
+        loadChildren: () => import('./tabs/misdatos/misdatos.module').then(m => m.MisdatosPageModule)
+      },
+      //{
+        //path: 'experiencia',
+        //loadChildren: () => import('./tabs/experiencia/experiencia.module').then(m => m.ExperienciaPageModule)
+      //},
+      //{
+        //path: 'certificaciones',
+        //loadChildren: () => import('./tabs/certificaciones/certificaciones.module').then(m => m.CertificacionesPageModule)
+      //},
+      {
+        path: 'hola',
+        loadChildren: () => import('./tabs/hola/hola.module').then(m => m.HolaPageModule)
+      },
+
+
     ]
-  }
+  },
+
 ];
 
 @NgModule({

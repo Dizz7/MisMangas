@@ -19,6 +19,22 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
     canActivate: [authGuard]
   },
+  //{
+    //path: 'misdatos',
+    //loadChildren: () => import('./home/tabs/misdatos/misdatos.module').then( m => m.MisdatosPageModule),
+    //canActivate: [authGuard]
+  //},
+  //{
+//    path: 'experiencia',
+  //  loadChildren: () => import('./home/tabs/experiencia/experiencia.module').then( m => m.ExperienciaPageModule),
+    //canActivate: [authGuard]
+  //},
+  //{
+    //path: 'certificaciones',
+    //loadChildren: () => import('./home/tabs/certificaciones/certificaciones.module').then( m => m.CertificacionesPageModule),
+    //canActivate: [authGuard]
+  //},
+
   {
     path: 'registro',
     loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule),

@@ -6,11 +6,12 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-experiencia',
-  templateUrl: './experiencia.component.html',
-  styleUrls: ['./experiencia.component.scss'],
+  templateUrl: './experiencia.page.html',
+  styleUrls: ['./experiencia.page.scss'],
   standalone: false,
 })
-export class ExperienciaComponent  implements OnInit {
+export class ExperienciaPage implements OnInit {
+
   user: string = '';
   empresa: string = '';
   trabaja_actualmente: boolean = false;
@@ -63,55 +64,45 @@ export class ExperienciaComponent  implements OnInit {
   }
 
   // Cerrar Menú al navegar
-  ngOnInit() {
+async ngOnInit(): Promise<void> {
     this.menuCtrl.close("main-menu");
+  // Leer datos guardados en localStorage
+  const guardado = localStorage.getItem('usuario_data');
+  if (guardado) {
+    const datos = JSON.parse(guardado);
+    this.user = datos.user || '';
+    this.empresa = datos.empresa || '';
+    this.trabaja_actualmente = datos.trabaja_actualmente || false;
+    this.anio_inicio = datos.anio_inicio || null;
+    this.anio_termino = datos.anio_termino || null;
+    this.cargo = datos.cargo || '';
+  }
 
-    const navigation = this.router.getCurrentNavigation();
-    const state = navigation?.extras?.state;
+  // Además, obtener la data actualizada desde base de datos si user está definido
+  if (this.user) {
+    this.authService.obtenerExperiencia(this.user).then(exp => {
+      if (exp) {
+        this.empresa = exp.empresa || this.empresa;
+        this.trabaja_actualmente = exp.trabaja_actualmente ?? this.trabaja_actualmente;
+        this.anio_inicio = exp.anio_inicio ?? this.anio_inicio;
+        this.anio_termino = exp.anio_termino ?? this.anio_termino;
+        this.cargo = exp.cargo || this.cargo;
 
-    if (state) {
-      this.user = state['user'] || '';
-      this.empresa = state['empresa'] || '';
-      this.trabaja_actualmente = state['trabaja_actualmente'] || false;
-      this.anio_inicio = state['anio_inicio'] || null;
-      this.anio_termino = state['anio_termino'] || null;
-      this.cargo = state['cargo'] || '';
-    } else {
-      const guardado = localStorage.getItem('usuario_data');
-      if (guardado) {
-        const datos = JSON.parse(guardado);
-        if (datos.user != null) this.user = datos.user;
-        if (datos.empresa != null) this.empresa = datos.empresa;
-        if (datos.trabaja_actualmente != null) this.trabaja_actualmente = datos.trabaja_actualmente;
-        if (datos.anio_inicio != null) this.anio_inicio = datos.anio_inicio;
-        if (datos.anio_termino != null) this.anio_termino = datos.anio_termino;
-        if (datos.cargo != null) this.cargo = datos.cargo;
+        // Actualiza localStorage para mantener sincronizados los datos
+        const actualizado = {
+          user: this.user,
+          empresa: this.empresa,
+          trabaja_actualmente: this.trabaja_actualmente,
+          anio_inicio: this.anio_inicio,
+          anio_termino: this.anio_termino,
+          cargo: this.cargo
+        };
+        localStorage.setItem('usuario_data', JSON.stringify(actualizado));
       }
-    }
+    });
+  }
 
-    // Recuperar desde la base de datos si se tiene un usuario válido
-    if (this.user) {
-      this.authService.obtenerExperiencia(this.user).then((exp) => {
-        if (exp) {
-          this.empresa = exp.empresa || '';
-          this.trabaja_actualmente = exp.trabaja_actualmente || false;
-          this.anio_inicio = exp.anio_inicio || null;
-          this.anio_termino = exp.anio_termino || null;
-          this.cargo = exp.cargo || '';
 
-          // Actualizar también en localStorage
-          const actualizado = {
-            user: this.user,
-            empresa: this.empresa,
-            trabaja_actualmente: this.trabaja_actualmente,
-            anio_inicio: this.anio_inicio,
-            anio_termino: this.anio_termino,
-            cargo: this.cargo
-          };
-          localStorage.setItem('usuario_data', JSON.stringify(actualizado));
-        }
-      });
-    }
   }
 
   // Método LIMPIAR con animación
