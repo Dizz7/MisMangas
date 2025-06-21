@@ -74,7 +74,7 @@ export class MisdatosPage implements OnInit {
   }
 
   // Cerrar Menú al navegar y obtener datos del estado de navegación
-  ngOnInit() {
+  async ngOnInit() {
     this.menuCtrl.close("main-menu");
   
     // Intentamos obtener los datos desde el estado de navegación
@@ -116,9 +116,22 @@ export class MisdatosPage implements OnInit {
         if (datos.email != null) this.email = datos.email;
         if (datos.nacimiento != null) this.nacimiento = new Date(datos.nacimiento);
         if (datos.educacion != null) this.educacion = datos.educacion;
+
+        // Imagen de perfil
+        const imagenLocal = localStorage.getItem('imagenPerfil');
+        if (imagenLocal) {
+          this.imagenPerfil = imagenLocal;
+        } else if (this.user) {
+          // Si no hay imagen en localStorage, intentamos cargar desde base de datos
+          const imagenDB = await this.authService.obtenerFotoPerfil(this.user);
+          if (imagenDB) {
+            this.imagenPerfil = imagenDB;
+            localStorage.setItem('imagenPerfil', imagenDB); // la guardamos localmente para la próxima
+            }
+          }
+    
       }
     }
-    
   }
 
   // Método LIMPIAR con animación

@@ -75,6 +75,13 @@ export class AuthService {
         FOREIGN KEY (user) REFERENCES usuarios(user) ON DELETE CASCADE
       )`
     );
+    await this.dbInstance.execute(
+      `CREATE TABLE IF NOT EXISTS fotoPerfil (
+      user TEXT PRIMARY KEY,
+      URI TEXT,
+      FOREIGN KEY (user) REFERENCES usuarios(user) ON DELETE CASCADE
+    )`,
+    );
 
 
   }
@@ -125,9 +132,16 @@ async loginUsuario(user: string, password: string): Promise<boolean> {
     );
     const certificaciones = certResult.values ?? [];
 
-    // Agregar experiencia y certificaciones al objeto usuarioData
+    // Obtener foto de perfil
+    const fotoPerfilResult = await this.dbInstance!.query(
+      'SELECT URI FROM fotoPerfil WHERE user = ?',
+      [user]
+    );
+    const fotoPerfil = fotoPerfilResult.values?.[0]?.URI ?? null;
+    // Agregar experiencia, certificaciones y foto al objeto usuarioData
     usuarioData.experiencia = experiencia;
     usuarioData.certificaciones = certificaciones;
+    usuarioData.fotoPerfil = fotoPerfil;
 
     // Guardar en localStorage
     localStorage.setItem('usuario', user);
@@ -310,6 +324,40 @@ async agregarCertificacion(user: string, certificacion: any): Promise<boolean> {
     console.error('Error al agregar certificación:', error);
     return false;
   }
+}
+// Método para actualizar foto de perfil
+async actualizarFotoPerfil(user: string, uri: string): Promise<boolean> {
+  try {
+    if (!this.dbInstance) {
+      await this.initDB();
+    }
+
+    await this.dbInstance!.run(
+      `INSERT OR REPLACE INTO fotoPerfil (user, URI) VALUES (?, ?)`,
+      [user, uri]
+    );
+    return true;
+  } catch (error) {
+    console.error('Error al actualizar foto de perfil:', error);
+    return false;
+  }
+}
+
+
+// Método para obtener foto de perfil
+async obtenerFotoPerfil(user: string): Promise<string | null> {
+  if (!this.dbInstance) {
+    await this.initDB();
+  }
+
+  const result = await this.dbInstance!.query(
+    'SELECT URI FROM fotoPerfil WHERE user = ?',
+    [user]
+  );
+
+  const row = result.values?.[0];
+
+  return row ? row.URI : null;
 }
 
 // Método para obtener certificación

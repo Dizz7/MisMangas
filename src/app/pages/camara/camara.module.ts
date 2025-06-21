@@ -15,7 +15,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     SharedModule,
     IonicModule,
-    CamaraPageRoutingModule
+    CamaraPageRoutingModule,
   ],
   declarations: [CamaraPage]
 })

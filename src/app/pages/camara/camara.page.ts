@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { Filesystem, Directory } from '@capacitor/filesystem';
-
+import { AuthService } from 'src/app/services/auth.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
@@ -17,7 +17,9 @@ export class CamaraPage implements OnInit {
   public photo: string | undefined;
 
   constructor(    private router: Router, 
-    private menuCtrl: MenuController) { }
+                  private menuCtrl: MenuController,
+                  private authService: AuthService,
+                ) { }
 
   ngOnInit() {
     this.menuCtrl.close("main-menu");
@@ -52,10 +54,33 @@ export class CamaraPage implements OnInit {
     }
   }
 
-  guardarImagen() {
-
-    // Guardar la imagen como base64 en localStorage
-    localStorage.setItem('imagenPerfil', this.photo!);
+  async guardarImagen() {
+    if (!this.photo) {
+      console.warn('No hay foto para guardar');
+      return;
+    }
+  
+    // Guardar la imagen en localStorage
+    localStorage.setItem('imagenPerfil', this.photo);
+  
+    // Obtener el usuario actual desde localStorage
+    const user = localStorage.getItem('usuario');
+    if (!user) {
+      console.error('No hay sesión de usuario activa');
+      return;
+    }
+  
+    // Guardar en base de datos
+    const exito = await this.authService.actualizarFotoPerfil(user, this.photo);
+  
+    if (exito) {
+      console.log('Foto guardada correctamente en la base de datos');
+      this.router.navigateByUrl('/misdatos').then(() => {
+        window.location.reload(); // para que la vista de perfil se actualice con la nueva foto
+      });
+    } else {
+      console.error('Error al guardar la foto en la base de datos');
+    }
   }
 
   // Volver al Home sin cambios
@@ -66,9 +91,21 @@ export class CamaraPage implements OnInit {
   }
 
   // Método para establecer una imagen por defecto
-  fotoDefecto() {
+  async fotoDefecto() {
     this.photo = '/assets/images/profile.jpg'; // Ruta de la imagen por defecto
     localStorage.setItem('imagenPerfil', this.photo);
+
+    const user = localStorage.getItem('usuario');
+    if (!user) {
+      console.error('No hay sesión de usuario activa');
+      return;
+    }
+
+    const exito = await this.authService.actualizarFotoPerfil(user, this.photo);
+
+    if (!exito) {
+      console.error('Error al guardar la imagen por defecto en la base de datos');
+    }
   }
 
 
