@@ -28,7 +28,7 @@ export class MapaPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.menuCtrl.close("main-menu");
-    this.startWatchingPosition();
+    // this.startWatchingPosition();  Esto muestra la ubicación al abrir la página
   }
 
   ngOnDestroy() {
@@ -68,5 +68,9 @@ export class MapaPage implements OnInit, OnDestroy {
       map,
       title: 'Ubicación actual'
     });
+  }
+
+  solicitarUbicacion() {
+    this.startWatchingPosition(); // Esto muestra la ubicación al hacer clic en el botón
   }
 }

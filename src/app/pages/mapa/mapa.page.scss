@@ -131,14 +131,18 @@
   
   
   .btn-custom {
-    background: #c29b9bf8 !important; // Fondo personalizado
-    color: #ffffff !important; // Texto blanco
+    --background: #c29b9bf8 !important; // Fondo personalizado
+    --color: #ffffff !important; // Texto blanco
     border-radius: 20px; // Bordes redondeados
     padding: 10px 20px; // Espaciado interno
     margin: 10px; // Margen externo
     font-size: 16px; // Tamaño del texto
     font-weight: bold; // Texto en negrita
     transition: background 0.3s, transform 0.3s; // Transiciones suaves
+  }
+  
+  .btn-custom:hover {
+    transform: scale(1.1);
   }
   
   .subtitulo {

@@ -37,9 +37,10 @@ export class AppComponent {
     }
   }
  // Cerrar sesión y redirigir a login
-  cerrarSesion() {
+  async cerrarSesion() {
     this.menuCtrl.close('main-menu'); // cierra menú si tienes uno con ese id
-    this.authService.logout();        // limpia sesión
+    await this.authService.logout();        // limpia sesión
+    await this.authService.cerrarConexion(); // cierra conexión
     this.router.navigate(['/login']); // redirige a login
   }
 }
