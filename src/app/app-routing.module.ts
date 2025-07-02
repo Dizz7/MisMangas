@@ -14,12 +14,6 @@ const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full'
   },
-
-  {
-    path: 'offline-login',
-    loadChildren: () => import('./pages/offline-login/offline-login.module').then( m => m.LoginPageModule)
-  },
-
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
@@ -93,6 +87,8 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
   },
+
+
 
 
 ];
