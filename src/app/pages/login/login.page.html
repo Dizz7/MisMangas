@@ -2,48 +2,27 @@
   <ion-card id="main" color="light">
     
     <ion-card-header>
-      <img #fotoLogo src="/assets/images/logo.png" alt="Logo" class="logo" />
+      <!--<img #fotoLogo src="/assets/images/logo.png" alt="Logo" class="logo" />-->
     </ion-card-header>
   
     <ion-list>
 
     <ion-card-content>
         
-        <h1>Bienvenid&#64;!</h1>
+        <h1> Mis Tareas ✨</h1>
       </ion-card-content>
 
       <ion-item>
-        <ion-label class="label" position="stacked">Usuario</ion-label>
-        <ion-input [(ngModel)]="user" placeholder="nombre de usuario" type="text"></ion-input>
+        <ion-label class="label" position="stacked">¿Qué harémos hoy?</ion-label>
+        <ion-input [(ngModel)]="tarea" placeholder="" type="text"></ion-input>
       </ion-item>
 
-      <ion-item>
-        <ion-label class="label" position="stacked">Password</ion-label>
-        <ion-input [(ngModel)]="password" placeholder ="●●●●" type="password" style="padding-top: 10px;"></ion-input>
-      </ion-item>
 
       <div class="ion-text-center">
-        <ion-button class="login-button" (click)="login()">Ingresar</ion-button>
+        <ion-button class="add-button" (click)="add()">Agregar a la lista</ion-button>
         
       </div>
 
-      <ion-text color="medium">
-        <p>
-          <a class="vinculo" [routerLink]="['/registro']">Registrarse</a>
-        </p>
-      </ion-text>
-
-      <ion-text color="medium">
-        <p>
-          <a class="vinculo" [routerLink]="['/forgot']">¿Olvidaste tu contraseña?</a>
-        </p>
-      </ion-text>
-
-      <!--<ion-text color="medium">
-        <p>
-          <a class="vinculo" [routerLink]="['/prueba-api']">api</a>
-        </p>
-      </ion-text> API DE PRUEBA CON CRUD COMPLETO  -->
 
 
     </ion-list>

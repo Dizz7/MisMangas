@@ -1,9 +1,10 @@
 /* Contenedor del logo: define el tamaño y la perspectiva 3D */
 .logo-container {
-  width: 100px;                /* Ancho fijo del contenedor */
-  height: 100px;               /* Alto fijo del contenedor */
+  width: 200px;                /* Ancho fijo del contenedor */
+  height: 50px;               /* Alto fijo del contenedor */
   margin-left: auto;           /* Empuja el elemento hacia la derecha */
   margin-right: 3%;            /* Deja un pequeño espacio desde el borde derecho */
+  margin-top: 5%;          
   perspective: 1000px;         /* Profundidad para el efecto 3D al rotar */
 }
 

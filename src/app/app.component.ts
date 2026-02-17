@@ -33,7 +33,7 @@ export class AppComponent {
       }
 
       // Redirigir a login para otras rutas
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/tabs');
     }
   }
  // Cerrar sesión y redirigir a login
@@ -41,6 +41,6 @@ export class AppComponent {
     this.menuCtrl.close('main-menu'); // cierra menú si tienes uno con ese id
     await this.authService.logout();        // limpia sesión
     await this.authService.cerrarConexion(); // cierra conexión
-    this.router.navigate(['/login']); // redirige a login
+    this.router.navigate(['/tabs']); // redirige a login
   }
 }
